@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" targetNamespace="http://Impl-GcCpm/com/tagic/gc/cpm/xslt/CPMResLog" version="8.0.5.0" xmlns:map="http://Impl-GcCpm/com/tagic/gc/cpm/xslt/CPMResLog">
+    <input correlationContext="" message="{http://Impl-GcCpmLibrary/GCIntegrationCPM}cpmGCProposalSyncResponseMsg" sharedContext="{http://Impl-GcCpm}cpmSharedBO" smoName="wsdl-primary" transientContext="" type="smo" types="" xpath="/"/>
+    <output correlationContext="" message="{http://Impl-AuditLibrary/AuditLoggingServices}upsertServiceLogRequestMsg" sharedContext="{http://Impl-GcCpm}cpmSharedBO" smoName="wsdl-primary" transientContext="" type="smo" types="" xpath="/"/>
+    <imports>
+        <import kind="java" location="com.tagic.hnb.Transform" namespace="xalan://com.tagic.hnb.Transform"/>
+    </imports>
+    <namespaces>
+        <namespace kind="supplement" prefix="io7" uri="http://Impl-GcCpm"/>
+        <namespace kind="supplement" prefix="io6" uri="http://www.ibm.com/xmlns/prod/websphere/http/sca/6.1.0"/>
+        <namespace kind="supplement" prefix="in" uri="wsdl.http://Impl-GcCpmLibrary/GCIntegrationCPM"/>
+        <namespace kind="supplement" prefix="io" uri="http://www.w3.org/2005/08/addressing"/>
+        <namespace kind="supplement" prefix="io3" uri="http://schemas.xmlsoap.org/ws/2004/08/addressing"/>
+        <namespace kind="supplement" prefix="in2" uri="http://Impl-GcCpmLibrary/GCIntegrationCPM"/>
+        <namespace kind="supplement" prefix="io2" uri="http://www.w3.org/2003/05/soap-envelope"/>
+        <namespace kind="supplement" prefix="io5" uri="http://www.ibm.com/xmlns/prod/websphere/mq/sca/6.0.0"/>
+        <namespace kind="supplement" prefix="io4" uri="http://www.ibm.com/websphere/sibx/smo/v6.0.1"/>
+        <namespace kind="supplement" prefix="in3" uri="http://Impl-GcCpmLibrary"/>
+        <namespace kind="supplement" prefix="out2" uri="http://Impl-AuditLibrary/AuditLoggingServices"/>
+        <namespace kind="supplement" prefix="out3" uri="http://NBHD"/>
+        <namespace kind="supplement" prefix="out" uri="wsdl.http://Impl-AuditLibrary/AuditLoggingServices"/>
+        <namespace kind="extension" prefix="Transform" uri="xalan://com.tagic.hnb.Transform"/>
+    </namespaces>
+    <generation engine="xslt2"/>
+    <mappingDeclaration name="CPMResLog">
+        <input namespace="http://www.ibm.com/websphere/sibx/smo/v6.0.1" path="smo"/>
+        <output namespace="http://www.ibm.com/websphere/sibx/smo/v6.0.1" path="smo"/>
+        <move>
+            <input path="context/shared/auditPrimaryKey" var="auditPrimaryKey"/>
+            <output path="body/upsertServiceLog/serviceLogRequest/serviceLogId"/>
+        </move>
+        <condition>
+            <if>
+                <input path="body/cpmGCProposalSyncResponse/cpmGCResponse" var="cpmGCResponse2"/>
+                <input path="body/cpmGCProposalSyncResponse/cpmGCResponse/errorText" var="errorText"/>
+                <input path="body/cpmGCProposalSyncResponse/cpmGCResponse/error" var="error"/>
+                <output path="body/upsertServiceLog/serviceLogRequest/errorDetails"/>
+                <test lang="xpath">(fn:boolean($errorText) and $errorText!='') or (fn:boolean($error) and $error!='')</test>
+                <customFunction lang="java" ref="Transform:transformXMLToJSON">
+                    <input path="$cpmGCResponse2/." var="cpmGCResponse2"/>
+                    <output path="."/>
+                    <param name="xmlNode" value="$cpmGCResponse2"/>
+                </customFunction>
+            </if>
+            <else>
+                <input path="body/cpmGCProposalSyncResponse/cpmGCResponse"/>
+                <output path="body/upsertServiceLog/serviceLogRequest/response"/>
+                <customFunction lang="java" ref="Transform:transformXMLToJSON">
+                    <input path="." var="cpmGCResponse3"/>
+                    <output path="."/>
+                    <param name="xmlNode" value="$cpmGCResponse3"/>
+                </customFunction>
+            </else>
+        </condition>
+        <local>
+            <input path="context/shared" var="shared"/>
+            <input path="body/cpmGCProposalSyncResponse/cpmGCResponse" var="cpmGCResponse"/>
+            <output path="context/shared"/>
+            <move>
+                <input path="$shared/auditPrimaryKey"/>
+                <output path="auditPrimaryKey"/>
+            </move>
+            <move>
+                <input path="$shared/itTicketNumber"/>
+                <output path="itTicketNumber"/>
+            </move>
+            <move>
+                <input path="$shared/loggingModule"/>
+                <output path="loggingModule"/>
+            </move>
+            <customFunction lang="java" ref="Transform:transformXMLToString">
+                <input path="$cpmGCResponse/." var="cpmGCResponse"/>
+                <output path="traceLog"/>
+                <param name="transformNode" value="$cpmGCResponse"/>
+            </customFunction>
+        </local>
+        <assign value="NB">
+            <output path="body/upsertServiceLog/serviceLogRequest/lob"/>
+        </assign>
+    </mappingDeclaration>
+</mappingRoot>

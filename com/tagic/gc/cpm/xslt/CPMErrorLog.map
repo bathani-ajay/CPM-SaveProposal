@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" targetNamespace="http://Impl-GcCpm/com/tagic/gc/cpm/xslt/CPMErrorLog" version="8.0.5.0" xmlns:map="http://Impl-GcCpm/com/tagic/gc/cpm/xslt/CPMErrorLog">
+    <input correlationContext="" message="{http://Impl-GcCpmLibrary/GCIntegrationCPM}cpmGCProposalSyncRequestMsg" sharedContext="{http://Impl-GcCpm}cpmSharedBO" smoName="wsdl-primary" transientContext="" type="smo" types="" xpath="/"/>
+    <output correlationContext="" message="{http://Impl-AuditLibrary/AuditLoggingServices}upsertServiceLogRequestMsg" sharedContext="{http://Impl-GcCpm}cpmSharedBO" smoName="wsdl-primary" transientContext="" type="smo" types="" xpath="/"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="io7" uri="http://Impl-GcCpm"/>
+        <namespace kind="supplement" prefix="io6" uri="http://www.ibm.com/xmlns/prod/websphere/http/sca/6.1.0"/>
+        <namespace kind="supplement" prefix="in" uri="wsdl.http://Impl-GcCpmLibrary/GCIntegrationCPM"/>
+        <namespace kind="supplement" prefix="io" uri="http://www.w3.org/2005/08/addressing"/>
+        <namespace kind="supplement" prefix="io3" uri="http://schemas.xmlsoap.org/ws/2004/08/addressing"/>
+        <namespace kind="supplement" prefix="in2" uri="http://Impl-GcCpmLibrary/GCIntegrationCPM"/>
+        <namespace kind="supplement" prefix="io2" uri="http://www.w3.org/2003/05/soap-envelope"/>
+        <namespace kind="supplement" prefix="io5" uri="http://www.ibm.com/xmlns/prod/websphere/mq/sca/6.0.0"/>
+        <namespace kind="supplement" prefix="io4" uri="http://www.ibm.com/websphere/sibx/smo/v6.0.1"/>
+        <namespace kind="supplement" prefix="in3" uri="http://Impl-GcCpmLibrary"/>
+        <namespace kind="supplement" prefix="out2" uri="http://Impl-AuditLibrary/AuditLoggingServices"/>
+        <namespace kind="supplement" prefix="out3" uri="http://NBHD"/>
+        <namespace kind="supplement" prefix="out" uri="wsdl.http://Impl-AuditLibrary/AuditLoggingServices"/>
+    </namespaces>
+    <generation engine="xslt2"/>
+    <mappingDeclaration name="CPMErrorLog">
+        <input namespace="http://www.ibm.com/websphere/sibx/smo/v6.0.1" path="smo"/>
+        <output namespace="http://www.ibm.com/websphere/sibx/smo/v6.0.1" path="smo"/>
+        <move>
+            <input path="context/failInfo/failureString"/>
+            <output path="body/upsertServiceLog/serviceLogRequest/errorDetails"/>
+        </move>
+        <move>
+            <input path="context/shared/auditPrimaryKey"/>
+            <output path="body/upsertServiceLog/serviceLogRequest/serviceLogId"/>
+        </move>
+        <local>
+            <input path="context/shared" var="shared"/>
+            <input path="context/failInfo/failureString" var="failureString"/>
+            <output path="context/shared"/>
+            <move>
+                <input path="$shared/auditPrimaryKey"/>
+                <output path="auditPrimaryKey"/>
+            </move>
+            <move>
+                <input path="$shared/itTicketNumber"/>
+                <output path="itTicketNumber"/>
+            </move>
+            <move>
+                <input path="$shared/loggingModule"/>
+                <output path="loggingModule"/>
+            </move>
+            <move>
+                <input path="$failureString/."/>
+                <output path="traceLog"/>
+            </move>
+        </local>
+        <assign value="NB">
+            <output path="body/upsertServiceLog/serviceLogRequest/lob"/>
+        </assign>
+    </mappingDeclaration>
+</mappingRoot>

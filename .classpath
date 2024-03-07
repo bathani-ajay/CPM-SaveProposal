@@ -9,5 +9,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/IBM Workflow Server v18.0 JRE"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/com.ibm.ws.ast.st.runtime.runtimeTarget.v85.bi/wps.v86"/>
 	<classpathentry exported="true" kind="src" path="/Impl-GcCpmLibrary"/>
+	<classpathentry exported="true" kind="src" path="/Impl-AuditLibrary"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

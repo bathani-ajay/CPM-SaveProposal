@@ -4,4 +4,5 @@
     <xci/>
   </boImplementation>
   <scdl:libraryDependency name="Impl-GcCpmLibrary" version=""/>
+  <scdl:libraryDependency name="Impl-AuditLibrary" version=""/>
 </scdl:moduleAndLibraryAttributes>

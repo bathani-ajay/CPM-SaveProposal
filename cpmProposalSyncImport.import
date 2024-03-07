@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scdl:import xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:configuration_6.1.0="http://www.ibm.com/xmlns/prod/websphere/j2ca/configuration/6.1.0" xmlns:http="http://www.ibm.com/xmlns/prod/websphere/scdl/http/6.1.0" xmlns:ns1="http://Impl-GcCpmLibrary/GCIntegrationCPM" xmlns:scdl="http://www.ibm.com/xmlns/prod/websphere/scdl/6.0.0" xmlns:wsdl="http://www.ibm.com/xmlns/prod/websphere/scdl/wsdl/6.0.0" displayName="cpmProposalSyncImport" name="cpmProposalSyncImport">
+  <interfaces>
+    <interface xsi:type="wsdl:WSDLPortType" portType="ns1:GCIntegrationCPM"/>
+  </interfaces>
+  <esbBinding xsi:type="http:HTTPImportBinding" defaultDataBindingReferenceName="configuration_6.1.0:UTF8JsonDataHandler">
+    <importInteraction endpointURL="http://172.20.251.126:8182/cxf/CPMInsurenceRestService/saveProposal" httpMethod="POST">
+      <sslSettings>
+        <sslConfigAlias>NodeDefaultSSLSettings</sslConfigAlias>
+      </sslSettings>
+      <readTimeOut>-1</readTimeOut>
+    </importInteraction>
+    <methodBinding method="cpmGCProposalSync">
+      <importInteraction endpointURL="http://172.20.251.126:8182/cxf/CPMInsurenceRestService/saveProposal" httpMethod="POST">
+        <sslSettings>
+          <sslConfigAlias>NodeDefaultSSLSettings</sslConfigAlias>
+        </sslSettings>
+      </importInteraction>
+    </methodBinding>
+  </esbBinding>
+</scdl:import>

@@ -1,0 +1,3127 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" targetNamespace="http://Impl-GcCpm/com/tagic/gc/cpm/xslt/CPMRequestMap" version="8.0.5.0" xmlns:map="http://Impl-GcCpm/com/tagic/gc/cpm/xslt/CPMRequestMap">
+    <input correlationContext="" message="{http://Impl-GcCpmLibrary/PaceGCCPMIntegration}paceCPMGCProposalSyncRequestMsg" sharedContext="{http://Impl-GcCpm}cpmSharedBO" smoName="wsdl-primary" transientContext="" type="smo" types="" xpath="/"/>
+    <output correlationContext="" message="{http://Impl-GcCpmLibrary/GCIntegrationCPM}cpmGCProposalSyncRequestMsg" sharedContext="{http://Impl-GcCpm}cpmSharedBO" smoName="wsdl-primary" transientContext="" type="smo" types="" xpath="/"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="io7" uri="http://Impl-GcCpm"/>
+        <namespace kind="supplement" prefix="io6" uri="http://www.ibm.com/xmlns/prod/websphere/http/sca/6.1.0"/>
+        <namespace kind="supplement" prefix="in" uri="wsdl.http://Impl-GcCpmLibrary/PaceGCCPMIntegration"/>
+        <namespace kind="supplement" prefix="io" uri="http://www.w3.org/2005/08/addressing"/>
+        <namespace kind="supplement" prefix="in2" uri="http://NBDATA"/>
+        <namespace kind="supplement" prefix="io3" uri="http://schemas.xmlsoap.org/ws/2004/08/addressing"/>
+        <namespace kind="supplement" prefix="io2" uri="http://www.w3.org/2003/05/soap-envelope"/>
+        <namespace kind="supplement" prefix="io5" uri="http://www.ibm.com/xmlns/prod/websphere/mq/sca/6.0.0"/>
+        <namespace kind="supplement" prefix="io4" uri="http://www.ibm.com/websphere/sibx/smo/v6.0.1"/>
+        <namespace kind="supplement" prefix="in3" uri="http://Impl-GcCpmLibrary/PaceGCCPMIntegration"/>
+        <namespace kind="supplement" prefix="out2" uri="http://Impl-GcCpmLibrary/GCIntegrationCPM"/>
+        <namespace kind="supplement" prefix="out3" uri="http://Impl-GcCpmLibrary"/>
+        <namespace kind="supplement" prefix="out" uri="wsdl.http://Impl-GcCpmLibrary/GCIntegrationCPM"/>
+        <namespace kind="supplement" prefix="in4" uri="http://GCD"/>
+    </namespaces>
+    <generation engine="xslt2"/>
+    <mappingDeclaration name="CPMRequestMap">
+        <input namespace="http://www.ibm.com/websphere/sibx/smo/v6.0.1" path="smo"/>
+        <output namespace="http://www.ibm.com/websphere/sibx/smo/v6.0.1" path="smo"/>
+        <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksPerson/name/namespaceURI"/>
+        </assign>
+        <assign value="PropRisks_Person">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksPerson/name/localPart"/>
+        </assign>
+        <assign>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksPerson/name/prefix"/>
+        </assign>
+        <assign value="java.lang.String">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksPerson/declaredType"/>
+        </assign>
+        <assign value="com.tagic.esb.cPMInsurenceClient.Risks">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksPerson/scope"/>
+        </assign>
+        <assign value="CPM">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksPerson/value"/>
+        </assign>
+        <assign value="false">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksPerson/nil"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/netPremium"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksPremium"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/totalSI"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksSumInsured"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="1714">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/productCode"/>
+        </assign>
+        <foreach>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/coverDetails"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksCoverDetailsCol/value/risksCoverDetails"/>
+            <convert>
+                <input path="coverDetails/cover_applicable" var="cover_applicable"/>
+                <output path="propCoverDetailsApplicable"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </convert>
+            <assign value="0.0">
+                <output path="propCoverDetailsCommision"/>
+            </assign>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propCoverDetailsCoverGroups/name/namespaceURI"/>
+            </assign>
+            <assign value="PropCoverDetails_CoverGroups">
+                <output path="propCoverDetailsCoverGroups/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propCoverDetailsCoverGroups/name/prefix"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propCoverDetailsCoverGroups/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.RisksCoverDetails">
+                <output path="propCoverDetailsCoverGroups/scope"/>
+            </assign>
+            <assign value="false">
+                <output path="propCoverDetailsCoverGroups/nil"/>
+            </assign>
+            <move>
+                <input path="coverDetails/cover_name"/>
+                <output path="propCoverDetailsCoverGroups/value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <convert>
+                <input path="coverDetails/cover_sublimit_value" var="cover_sublimit_value"/>
+                <output path="propCoverDetailsDifferentialSI"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </convert>
+            <convert>
+                <input path="coverDetails/cover_premium_uw" var="cover_premium_uw"/>
+                <output path="propCoverDetailsEndorsementAmount"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </convert>
+            <assign value="false">
+                <output path="propCoverDetailsIsDataDeleted"/>
+            </assign>
+            <assign value="false">
+                <output path="propCoverDetailsIsOldDataDeleted"/>
+            </assign>
+            <convert>
+                <input path="coverDetails/cover_premium_uw" var="cover_premium_uw1"/>
+                <output path="propCoverDetailsPremium"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </convert>
+            <convert>
+                <input path="coverDetails/cover_sublimit_value" var="cover_sublimit_value1"/>
+                <output path="propCoverDetailsSumInsured"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </convert>
+            <convert>
+                <input path="coverDetails/cover_revised_rate_uw" var="cover_revised_rate_uw"/>
+                <output path="propCoverDetailsRate"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </convert>
+            <assign value="0.0">
+                <output path="propCoverDetailsCumulativeEndAmount"/>
+            </assign>
+            <assign value="0.0">
+                <output path="propCoverDetailsCumulativeEndSerTax"/>
+            </assign>
+            <assign value="0.0">
+                <output path="propCoverDetailsCumulativePremium"/>
+            </assign>
+            <assign value="0.0">
+                <output path="propCoverDetailsCumulativeServuceTax"/>
+            </assign>
+            <assign value="false">
+                <output path="propCoverDetailsMMCPCode/nil"/>
+            </assign>
+            <move>
+                <input path="mmcpCode"/>
+                <output path="propCoverDetailsMMCPCode/value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="com.tagic.esb.cPMInsurenceClient.RisksCoverDetails">
+                <output path="propCoverDetailsMMCPCode/scope"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propCoverDetailsMMCPCode/declaredType"/>
+            </assign>
+            <assign>
+                <output path="propCoverDetailsMMCPCode/name/prefix"/>
+            </assign>
+            <assign value="PropCoverDetails_MMCPCode">
+                <output path="propCoverDetailsMMCPCode/name/localPart"/>
+            </assign>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propCoverDetailsMMCPCode/name/namespaceURI"/>
+            </assign>
+        </foreach>
+        <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksCoverDetailsCol/name/namespaceURI"/>
+        </assign>
+        <assign value="PropRisks_CoverDetails_Col">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksCoverDetailsCol/name/localPart"/>
+        </assign>
+        <assign>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksCoverDetailsCol/name/prefix"/>
+        </assign>
+        <assign value="com.tagic.esb.cPMInsurenceClient.ArrayOfRisksCoverDetails">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksCoverDetailsCol/declaredType"/>
+        </assign>
+        <assign value="com.tagic.esb.cPMInsurenceClient.Risks">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksCoverDetailsCol/scope"/>
+        </assign>
+        <assign value="false">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksCoverDetailsCol/nil"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/totalSI"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksDifferentialSI"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/netPremium"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisksCol/risks/propRisksEndorsementAmount"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <foreach>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/clauseDetails"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposal_ClauseDetails_Col/generalProposalClauseDetails"/>
+            <convert>
+                <input path="clauseCode"/>
+                <output path="propClauseDetailsClauseCodeMandatary"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </convert>
+            <move>
+                <input path="clauseMandatory"/>
+                <output path="propClauseDetailsDefaultMandatary"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="false">
+                <output path="propClauseDetailsIsDataDeleted"/>
+            </assign>
+            <assign value="false">
+                <output path="propClauseDetailsIsOldDataDeleted"/>
+            </assign>
+            <assign value="false">
+                <output path="propClauseDetailsClauseNumberMandatary/nil"/>
+            </assign>
+            <convert>
+                <input path="clauseNumber"/>
+                <output path="propClauseDetailsClauseNumberMandatary/value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </convert>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propClauseDetailsClauseNumberMandatary/name/namespaceURI"/>
+            </assign>
+            <assign value="PropClauseDetails_ClauseNumber_Mandatary">
+                <output path="propClauseDetailsClauseNumberMandatary/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propClauseDetailsClauseNumberMandatary/name/prefix"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propClauseDetailsClauseNumberMandatary/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalClauseDetails">
+                <output path="propClauseDetailsClauseNumberMandatary/scope"/>
+            </assign>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propClauseDetailsClauseShortDescription/name/namespaceURI"/>
+            </assign>
+            <assign value="PropClauseDetails_ClauseShortDescription">
+                <output path="propClauseDetailsClauseShortDescription/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propClauseDetailsClauseShortDescription/name/prefix"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propClauseDetailsClauseShortDescription/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalClauseDetails">
+                <output path="propClauseDetailsClauseShortDescription/scope"/>
+            </assign>
+            <move>
+                <input path="clauseDescription"/>
+                <output path="propClauseDetailsClauseShortDescription/value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="false">
+                <output path="propClauseDetailsClauseShortDescription/nil"/>
+            </assign>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propClauseDetailsClauseType/name/namespaceURI"/>
+            </assign>
+            <assign value="PropClauseDetails_ClauseType">
+                <output path="propClauseDetailsClauseType/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propClauseDetailsClauseType/name/prefix"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propClauseDetailsClauseType/declaredType"/>
+            </assign>
+            <assign value="false">
+                <output path="propClauseDetailsClauseType/nil"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalClauseDetails">
+                <output path="propClauseDetailsClauseType/scope"/>
+            </assign>
+            <move>
+                <input path="clauseType"/>
+                <output path="propClauseDetailsClauseType/value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+        </foreach>
+        <foreach>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/financierDetails"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposal_FinancierDetails_Col/generalProposalFinancierDetails"/>
+            <assign value="PropFinancierDetails_Address_Mandatary">
+                <output path="propFinancierDetailsAddressMandatary/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsAddressMandatary/name/prefix"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propFinancierDetailsAddressMandatary/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalFinancierDetails">
+                <output path="propFinancierDetailsAddressMandatary/scope"/>
+            </assign>
+            <assign value="false">
+                <output path="propFinancierDetailsAddressMandatary/nil"/>
+            </assign>
+            <move>
+                <input path="financierData/hypothecation_bank_address"/>
+                <output path="propFinancierDetailsAddressMandatary/value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propFinancierDetailsAgreementType/name/namespaceURI"/>
+            </assign>
+            <assign value="PropFinancierDetails_AgreementType">
+                <output path="propFinancierDetailsAgreementType/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsAgreementType/name/prefix"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propFinancierDetailsAgreementType/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalFinancierDetails">
+                <output path="propFinancierDetailsAgreementType/scope"/>
+            </assign>
+            <assign value="Hypothecation">
+                <output path="propFinancierDetailsAgreementType/value"/>
+            </assign>
+            <assign value="false">
+                <output path="propFinancierDetailsDistrictMandatary/nil"/>
+            </assign>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propFinancierDetailsBranchName/name/namespaceURI"/>
+            </assign>
+            <assign value="PropFinancierDetails_BranchName">
+                <output path="propFinancierDetailsBranchName/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsBranchName/name/prefix"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propFinancierDetailsBranchName/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalFinancierDetails">
+                <output path="propFinancierDetailsBranchName/scope"/>
+            </assign>
+            <assign value="false">
+                <output path="propFinancierDetailsCityCode/nil"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsCityCode/name/prefix"/>
+            </assign>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propFinancierDetailsCityCode/name/namespaceURI"/>
+            </assign>
+            <assign value="PropFinancierDetails_CityCode">
+                <output path="propFinancierDetailsCityCode/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsBranchName/value"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propFinancierDetailsCityCode/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalFinancierDetails">
+                <output path="propFinancierDetailsCityCode/scope"/>
+            </assign>
+            <assign value="false">
+                <output path="propFinancierDetailsCityMandatary/nil"/>
+            </assign>
+            <move>
+                <input path="financierData/hypothecation_city/value"/>
+                <output path="propFinancierDetailsCityCode/value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propFinancierDetailsCityMandatary/name/namespaceURI"/>
+            </assign>
+            <assign value="PropFinancierDetails_City_Mandatary">
+                <output path="propFinancierDetailsCityMandatary/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsCityMandatary/name/prefix"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propFinancierDetailsCityMandatary/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalFinancierDetails">
+                <output path="propFinancierDetailsCityMandatary/scope"/>
+            </assign>
+            <assign value="false">
+                <output path="propFinancierDetailsCountry/nil"/>
+            </assign>
+            <move>
+                <input path="financierData/hypothecation_city/name"/>
+                <output path="propFinancierDetailsCityMandatary/value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propFinancierDetailsCountry/name/namespaceURI"/>
+            </assign>
+            <assign value="PropFinancierDetails_Country">
+                <output path="propFinancierDetailsCountry/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsCountry/name/prefix"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propFinancierDetailsCountry/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalFinancierDetails">
+                <output path="propFinancierDetailsCountry/scope"/>
+            </assign>
+            <assign value="false">
+                <output path="propFinancierDetailsDistrictCode/nil"/>
+            </assign>
+            <assign value="64">
+                <output path="propFinancierDetailsCountry/value"/>
+            </assign>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propFinancierDetailsDistrictCode/name/namespaceURI"/>
+            </assign>
+            <assign value="PropFinancierDetails_DistrictCode">
+                <output path="propFinancierDetailsDistrictCode/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsDistrictCode/name/prefix"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propFinancierDetailsDistrictCode/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalFinancierDetails">
+                <output path="propFinancierDetailsDistrictCode/scope"/>
+            </assign>
+            <move>
+                <input path="financierData/hypothecation_district/value"/>
+                <output path="propFinancierDetailsDistrictCode/value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="false">
+                <output path="propFinancierDetailsFinancierName/nil"/>
+            </assign>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propFinancierDetailsDistrictMandatary/name/namespaceURI"/>
+            </assign>
+            <assign value="PropFinancierDetails_District_Mandatary">
+                <output path="propFinancierDetailsDistrictMandatary/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsDistrictMandatary/name/prefix"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propFinancierDetailsDistrictMandatary/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalFinancierDetails">
+                <output path="propFinancierDetailsDistrictMandatary/scope"/>
+            </assign>
+            <assign value="false">
+                <output path="propFinancierDetailsBranchName/nil"/>
+            </assign>
+            <move>
+                <input path="financierData/hypothecation_district/name"/>
+                <output path="propFinancierDetailsDistrictMandatary/value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <convert>
+                <input path="financierCode" var="financierCode"/>
+                <output path="propFinancierDetailsFinancierCodeMandatary"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </convert>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propFinancierDetailsFinancierName/name/namespaceURI"/>
+            </assign>
+            <assign value="PropFinancierDetails_FinancierName">
+                <output path="propFinancierDetailsFinancierName/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsFinancierName/name/prefix"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propFinancierDetailsFinancierName/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalFinancierDetails">
+                <output path="propFinancierDetailsFinancierName/scope"/>
+            </assign>
+            <assign value="false">
+                <output path="propFinancierDetailsAgreementType/nil"/>
+            </assign>
+            <move>
+                <input path="financierData/hypothecation_bank_name"/>
+                <output path="propFinancierDetailsFinancierName/value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="java.lang.String">
+                <output path="propFinancierDetailsFinancierStatus/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalFinancierDetails">
+                <output path="propFinancierDetailsFinancierStatus/scope"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsFinancierStatus/name/prefix"/>
+            </assign>
+            <assign value="false">
+                <output path="propFinancierDetailsFinancierStatus/nil"/>
+            </assign>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propFinancierDetailsFinancierStatus/name/namespaceURI"/>
+            </assign>
+            <assign value="PropFinancierDetails_FinancierStatus">
+                <output path="propFinancierDetailsFinancierStatus/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsFinancierStatus/value"/>
+            </assign>
+            <assign value="false">
+                <output path="propFinancierDetailsIsDataDeleted"/>
+            </assign>
+            <assign value="false">
+                <output path="propFinancierDetailsIsOldDataDeleted"/>
+            </assign>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propFinancierDetailsLoanAccountNo/name/namespaceURI"/>
+            </assign>
+            <assign value="PropFinancierDetails_LoanAccountNo">
+                <output path="propFinancierDetailsLoanAccountNo/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsLoanAccountNo/name/prefix"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propFinancierDetailsLoanAccountNo/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalFinancierDetails">
+                <output path="propFinancierDetailsLoanAccountNo/scope"/>
+            </assign>
+            <assign value="false">
+                <output path="propFinancierDetailsLoanAccountNo/nil"/>
+            </assign>
+            <move>
+                <input path="financierData/banca_loan_acct_number"/>
+                <output path="propFinancierDetailsLoanAccountNo/value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <convert>
+                <input path="financierData/hypothecation_bank_zipcode" var="hypothecation_bank_zipcode"/>
+                <output path="propFinancierDetailsPincodeMandatary"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </convert>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propFinancierDetailsRemarks/name/namespaceURI"/>
+            </assign>
+            <assign value="PropFinancierDetails_Remarks">
+                <output path="propFinancierDetailsRemarks/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsRemarks/name/prefix"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propFinancierDetailsRemarks/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalFinancierDetails">
+                <output path="propFinancierDetailsRemarks/scope"/>
+            </assign>
+            <assign value="false">
+                <output path="propFinancierDetailsRemarks/nil"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsRemarks/value"/>
+            </assign>
+            <convert>
+                <input path="srNo"/>
+                <output path="propFinancierDetailsSrNoMandatary"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </convert>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propFinancierDetailsStateCode/name/namespaceURI"/>
+            </assign>
+            <assign value="PropFinancierDetails_StateCode">
+                <output path="propFinancierDetailsStateCode/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsStateCode/name/prefix"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propFinancierDetailsStateCode/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalFinancierDetails">
+                <output path="propFinancierDetailsStateCode/scope"/>
+            </assign>
+            <assign value="false">
+                <output path="propFinancierDetailsStateCode/nil"/>
+            </assign>
+            <move>
+                <input path="financierData/hypothecation_state/value"/>
+                <output path="propFinancierDetailsStateCode/value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propFinancierDetailsStateMandatary/name/namespaceURI"/>
+            </assign>
+            <assign value="PropFinancierDetails_State_Mandatary">
+                <output path="propFinancierDetailsStateMandatary/name/localPart"/>
+            </assign>
+            <assign>
+                <output path="propFinancierDetailsStateMandatary/name/prefix"/>
+            </assign>
+            <assign value="java.lang.String">
+                <output path="propFinancierDetailsStateMandatary/declaredType"/>
+            </assign>
+            <assign value="com.tagic.esb.cPMInsurenceClient.GeneralProposalFinancierDetails">
+                <output path="propFinancierDetailsStateMandatary/scope"/>
+            </assign>
+            <assign value="false">
+                <output path="propFinancierDetailsStateMandatary/nil"/>
+            </assign>
+            <move>
+                <input path="financierData/hypothecation_state/name"/>
+                <output path="propFinancierDetailsStateMandatary/value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="http://schemas.datacontract.org/2004/07/CPMInsurance_ABC_WCFService">
+                <output path="propFinancierDetailsAddressMandatary/name/namespaceURI"/>
+            </assign>
+        </foreach>
+        <assign value="SB">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/ProductType"/>
+        </assign>
+        <assign value="NA">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_RiderCoverage"/>
+        </assign>
+        <assign value="Annual">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_PaymentType_Mandatary"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/floaterCover"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_CardExpiryMonth"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <convert>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/customerMobileNo" var="customerMobileNo"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_ContactNumber"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </convert>
+        <assign value="Mid Market">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_AccountType"/>
+        </assign>
+        <assign value="Industry">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_IndustrySpecification"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_PolicyWordings"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/netPremium"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_TotalPremiumForMBD"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="EAR/CAR">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_MBDVariant"/>
+        </assign>
+        <assign value="CPM">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_MBDSubVariant"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/internationalEmailID"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_Text1"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/accountContractNo"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_Product1224"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropFinancierDetails_Validate"/>
+        </assign>
+        <assign value="1714">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropClauseDetails_ProductCode_Mandatary"/>
+        </assign>
+        <assign value="17">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropClauseDetails_DepartmentCode_Mandatary"/>
+        </assign>
+        <assign value="1714.0">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_ProductCode"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/officeLocn/value"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_DisplayOfficeCode"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="No Exemption">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_ServiceTaxExemptionCategory_Mandatary"/>
+        </assign>
+        <assign value="New Business">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_BusinessType_Mandatary"/>
+        </assign>
+        <assign value="Urban">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_Sector_Mandatary"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/officeLocn/name"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_OfficeName"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/officeLocn/value"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_OfficeCode"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="No">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_ReInsuranceInward"/>
+        </assign>
+        <assign value="Yes">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_PolicySchedule_Mandatary"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/policyNo"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_PolicyNumberChar"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <convert>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/policyNo" var="policyNo"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_PolicyNo"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </convert>
+        <assign value="AUTO">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_CovernoteGenType"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/totalSI"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_TotalSi"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/totalSI"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_EndorsementSi"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="Yearly">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_OptionForCalculation"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/officeLocn/value"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_BranchOfficeCode"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/policyStartDate"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropPolicyEffectivedate_Fromdate_Mandatary"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="00:01">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropPolicyEffectivedate_Fromhour_Mandatary"/>
+        </assign>
+        <assign value="23:59">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropPolicyEffectivedate_Tohour_Mandatary"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/policyEndDate"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropPolicyEffectivedate_Todate_Mandatary"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="SYSTEM">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_TypeOfPolicy"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/issuanceDate"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropReferenceNoDate_ReferenceDate_Mandatary"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="17">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_DepartmentCode"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/issuanceDate"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropCustomerReferenceInfo_PolicyConversionDate"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/customerID"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropCustomerDtls_CustomerID_Mandatary"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/customerName"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropCustomerDtls_CustomerName"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/customerType"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropCustomerDtls_CustomerType"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="INR">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_PolicyCurrency"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/policyKey"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_ApplicationNumber"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <condition>
+            <if>
+                <input path="body/paceCPMGCProposalSync/paceCPMRequest/netPremium" var="netPremium"/>
+                <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_ProposalFormNumber"/>
+                <test lang="xpath">fn:boolean($netPremium) and $netPremium&gt;100000</test>
+                <assign value="1234">
+                    <output path="."/>
+                </assign>
+            </if>
+            <else>
+                <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_ProposalFormNumber"/>
+                <assign>
+                    <output path="."/>
+                </assign>
+            </else>
+        </condition>
+        <assign value="YES">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_ActiveFlag"/>
+        </assign>
+        <assign value="PropertyAndEnergy">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_DepartmentName"/>
+        </assign>
+        <assign value="100">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropDistributionChannel_SpecialDiscount"/>
+        </assign>
+        <assign value="VIEWPROPOSAL">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropDistributionChannel_OperationMode"/>
+        </assign>
+        <assign value="INTERMEDIARY">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropDistributionChannel_BusinessSource_Mandatary"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/channelType" var="channelType"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropDistributionChannel_BusineeChanneltype"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="IPDS">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropMODetails_TertiaryMOCode"/>
+        </assign>
+        <assign value="1">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropVerticalDtls_TertiaryVerticalName"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/producerCode"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropIntermediaryDetails_IntermediaryCode"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/producerName"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropIntermediaryDetails_IntermediaryName"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/producerType"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropIntermediaryDetails_IntermediaryType"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropCoverNoteDetails_Validate"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/netPremium"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropPremiumCalculation_NetPremium"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/totalTaxValue"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropPremiumCalculation_ServiceTax"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="0.5">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropPremiumCalculation_StampDuty"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/totalPremium"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropPremiumCalculation_TotalPremium"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/cpmGrid[1]/totalPremium"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropPremiumCalculation_BasicPremium"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="1">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropPremiumCalculation_SP_PR_LTFactor"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/netPremium"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropPremiumCalculation_EndorsementPremium"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/totalTaxValue"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropPremiumCalculation_EndorsementServiceTax"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/netPremium"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropPremiumCalculation_NetPremiumCurrency"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="1714">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropProductDetails_ProductCode"/>
+        </assign>
+        <assign value="17">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropProductDetails_DepartmentCode"/>
+        </assign>
+        <assign value="Automatic">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropEndorsementDtls_CancellationForDoubleInsurance"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/issuanceDate"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropEndorsementDtls_PartnerApplicationDate"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="Construction">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralNodes_PolicyCoverVariant"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/issuanceDate"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralNodes_ApplicationDate"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="ContractorsPlantAndMachineryInsurance">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropProductName"/>
+        </assign>
+        <assign value="NEWPOLICY">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/modeOfOperation"/>
+        </assign>
+        <assign value="TASKUSER">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/userId"/>
+        </assign>
+        <assign value="ADMIN">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/userRole"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/rmName"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_ContactPerson"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/rmEmail"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_EmailId"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_FinancierApplicability"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_CoInsuranceApplicability"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_ClauseApplicable"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_ConditionApplicable"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_ExclusionApplicable"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_WarrentyApplicable"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_ShortPeriodLongPeriod"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_CoverNoteApplicability"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_ValidateExclusion"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_MinimumPremium"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_ValidateWarranty"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_ValidateEndorsementData"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_TariffProduct"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_PopulateTransactionBegin"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_CommissionApplicable"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_AfterFetch"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_ValidateClause"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_RenewalAllowed"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropParameters_ValidateCondition"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropCalculation_CalculateRate"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropEndorsementDtls_ISUWCompleted"/>
+        </assign>
+        <assign value="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropEndorsementDtls_CancellationDueToClaim"/>
+        </assign>
+        <assign value="1714">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/Code"/>
+        </assign>
+        <assign value="CPMInsurance">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/Name"/>
+        </assign>
+        <assign value="SME/NON-SME">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/SMENONSME/Name"/>
+        </assign>
+        <assign value="GRP1137">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/SMENONSME/Value"/>
+        </assign>
+        <assign value="GroupData">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/SMENONSME/SMENONSME/Type"/>
+        </assign>
+        <assign value="SMEApplicability">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/SMENONSME/SMENONSME/SMEApplicability/Name"/>
+        </assign>
+        <assign value="String">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/SMENONSME/SMENONSME/SMEApplicability/Type"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/smeApplicability"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/SMENONSME/SMENONSME/SMEApplicability/Value"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="Risk Location Details">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/RiskLocationDetails/Name"/>
+        </assign>
+        <assign value="GRP868">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/RiskLocationDetails/Value"/>
+        </assign>
+        <foreach>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/riskLocationDetails"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/RiskLocationDetails/RiskLocationDetails"/>
+            <assign value="GroupData">
+                <output path="Type"/>
+            </assign>
+            <assign value="Location">
+                <output path="Location/Name"/>
+            </assign>
+            <assign value="Double">
+                <output path="Location/Type"/>
+            </assign>
+            <move>
+                <input path="locationCode"/>
+                <output path="Location/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="Is the location address same as the customer address">
+                <output path="Isthelocationaddresssameasthecustomeraddress/Name"/>
+            </assign>
+            <assign value="0">
+                <output path="Isthelocationaddresssameasthecustomeraddress/Value"/>
+            </assign>
+            <assign value="String">
+                <output path="Isthelocationaddresssameasthecustomeraddress/Type"/>
+            </assign>
+            <assign value="Address Line 1">
+                <output path="AddressLine1/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="AddressLine1/Type"/>
+            </assign>
+            <move>
+                <input path="riskDetails/coverage_location_address_line1"/>
+                <output path="AddressLine1/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="Address Line 2">
+                <output path="AddressLine2/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="AddressLine2/Type"/>
+            </assign>
+            <move>
+                <input path="riskDetails/coverage_location_address_line2"/>
+                <output path="AddressLine2/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <move>
+                <input path="riskDetails/coverage_location_address_line3"/>
+                <output path="AddressLine3/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="Address Line 3">
+                <output path="AddressLine3/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="AddressLine3/Type"/>
+            </assign>
+            <assign value="Village">
+                <output path="Village/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="Village/Type"/>
+            </assign>
+            <assign>
+                <output path="Village/Value"/>
+            </assign>
+            <assign value="City">
+                <output path="City/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="City/Type"/>
+            </assign>
+            <move>
+                <input path="riskDetails/coverage_location_city/name"/>
+                <output path="City/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="District">
+                <output path="District/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="District/Type"/>
+            </assign>
+            <move>
+                <input path="riskDetails/coverage_location_district/name"/>
+                <output path="District/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="State">
+                <output path="State/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="State/Type"/>
+            </assign>
+            <move>
+                <input path="riskDetails/coverge_location_state/name"/>
+                <output path="State/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="Country">
+                <output path="Country/Name"/>
+            </assign>
+            <assign value="INDIA">
+                <output path="Country/Value"/>
+            </assign>
+            <assign value="String">
+                <output path="Country/Type"/>
+            </assign>
+            <assign value="Pincode">
+                <output path="Pincode/Name"/>
+            </assign>
+            <assign value="Double">
+                <output path="Pincode/Type"/>
+            </assign>
+            <move>
+                <input path="riskDetails/coverage_location_zipcode/value"/>
+                <output path="Pincode/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="TAC EQ Zone">
+                <output path="TACEQZone/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="TACEQZone/Type"/>
+            </assign>
+            <move>
+                <input path="riskDetails/tac_eq_zone"/>
+                <output path="TACEQZone/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <move>
+                <input path="mreZone"/>
+                <output path="MREZone/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="MRE Zone">
+                <output path="MREZone/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="MREZone/Type"/>
+            </assign>
+            <assign value="CRESTA Zone">
+                <output path="CRESTAZone/Name"/>
+            </assign>
+            <move>
+                <input path="riskDetails/cresta_zone"/>
+                <output path="CRESTAZone/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="String">
+                <output path="CRESTAZone/Type"/>
+            </assign>
+            <assign value="Age of the Risk">
+                <output path="AgeoftheRisk/Name"/>
+            </assign>
+            <assign>
+                <output path="AgeoftheRisk/Value"/>
+            </assign>
+            <assign value="Double">
+                <output path="AgeoftheRisk/Type"/>
+            </assign>
+            <assign value="TAC Occupancy">
+                <output path="TACOccupancy/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="TACOccupancy/Type"/>
+            </assign>
+            <move>
+                <input path="tacOccupancy"/>
+                <output path="TACOccupancy/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="OGIS Occupancy">
+                <output path="OGISOccupancy/Name"/>
+            </assign>
+            <assign value="Construction-CAR">
+                <output path="OGISOccupancy/Value"/>
+            </assign>
+            <assign value="String">
+                <output path="OGISOccupancy/Type"/>
+            </assign>
+            <assign value="Business Activity">
+                <output path="BusinessActivity/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="BusinessActivity/Type"/>
+            </assign>
+            <move>
+                <input path="tacOccupancy"/>
+                <output path="BusinessActivity/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="Construction Class">
+                <output path="ConstructionClass/Name"/>
+            </assign>
+            <assign>
+                <output path="ConstructionClass/Value"/>
+            </assign>
+            <assign value="String">
+                <output path="ConstructionClass/Type"/>
+            </assign>
+            <assign value="SIC Code">
+                <output path="SICCode/Name"/>
+            </assign>
+            <assign>
+                <output path="SICCode/Value"/>
+            </assign>
+            <assign value="String">
+                <output path="SICCode/Type"/>
+            </assign>
+            <assign value="Hazard Grade">
+                <output path="HazardGrade/Name"/>
+            </assign>
+            <assign>
+                <output path="HazardGrade/Value"/>
+            </assign>
+            <assign value="String">
+                <output path="HazardGrade/Type"/>
+            </assign>
+            <assign value="SIC Description">
+                <output path="SICDescription/Name"/>
+            </assign>
+            <assign>
+                <output path="SICDescription/Value"/>
+            </assign>
+            <assign value="String">
+                <output path="SICDescription/Type"/>
+            </assign>
+            <assign value="Sub SIC Code">
+                <output path="SubSICCode/Name"/>
+            </assign>
+            <assign>
+                <output path="SubSICCode/Value"/>
+            </assign>
+            <assign value="String">
+                <output path="SubSICCode/Type"/>
+            </assign>
+            <assign value="Sub SIC Description">
+                <output path="SubSICDescription/Name"/>
+            </assign>
+            <assign>
+                <output path="SubSICDescription/Value"/>
+            </assign>
+            <assign value="String">
+                <output path="SubSICDescription/Type"/>
+            </assign>
+            <assign value="Minor Line">
+                <output path="MinorLine/Name"/>
+            </assign>
+            <assign value="CPM">
+                <output path="MinorLine/Value"/>
+            </assign>
+            <assign value="String">
+                <output path="MinorLine/Type"/>
+            </assign>
+            <assign value="Risk Engineer">
+                <output path="RiskEngineer/Name"/>
+            </assign>
+            <assign value="NA">
+                <output path="RiskEngineer/Value"/>
+            </assign>
+            <assign value="String">
+                <output path="RiskEngineer/Type"/>
+            </assign>
+            <assign value="PML">
+                <output path="PML/Name"/>
+            </assign>
+            <assign value="Double">
+                <output path="PML/Type"/>
+            </assign>
+            <assign value="100">
+                <output path="PML/Value"/>
+            </assign>
+            <assign value="MFL">
+                <output path="MFL/Name"/>
+            </assign>
+            <assign value="100">
+                <output path="MFL/Value"/>
+            </assign>
+            <assign value="Double">
+                <output path="MFL/Type"/>
+            </assign>
+            <assign value="MAS">
+                <output path="MAS/Name"/>
+            </assign>
+            <assign value="100">
+                <output path="MAS/Value"/>
+            </assign>
+            <assign value="Double">
+                <output path="MAS/Type"/>
+            </assign>
+        </foreach>
+        <assign value="Clause Wordings">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/ClauseWordings/Name"/>
+        </assign>
+        <assign value="GRP893">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/ClauseWordings/Value"/>
+        </assign>
+        <foreach>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/clauseWording"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/ClauseWordings/ClauseWordings"/>
+            <assign value="GroupData">
+                <output path="Type"/>
+            </assign>
+            <assign value="Clause Code">
+                <output path="ClauseCode/Name"/>
+            </assign>
+            <convert>
+                <input path="insuring_clauses_code"/>
+                <output path="ClauseCode/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </convert>
+            <assign value="String">
+                <output path="ClauseCode/Type"/>
+            </assign>
+            <assign value="String">
+                <output path="ClauseDescription/Type"/>
+            </assign>
+            <move>
+                <input path="insuring_clauses_description"/>
+                <output path="ClauseDescription/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="Clause Description">
+                <output path="ClauseDescription/Name"/>
+            </assign>
+        </foreach>
+        <assign value="AdditionalInsuredDetail">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/AdditionalInsuredDetail/Name"/>
+        </assign>
+        <assign value="GRP940">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/AdditionalInsuredDetail/Value"/>
+        </assign>
+        <assign value="Warranty Details">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/WarrantyDetails/Name"/>
+        </assign>
+        <assign value="GRP941">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/WarrantyDetails/Value"/>
+        </assign>
+        <foreach>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/warrantyDetails"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/WarrantyDetails/WarrantyDetails"/>
+            <assign value="GroupData">
+                <output path="Type"/>
+            </assign>
+            <move>
+                <input path="value"/>
+                <output path="SerialNo/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <move>
+                <input path="name"/>
+                <output path="WarrantyDescription/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="Serial No">
+                <output path="SerialNo/Name"/>
+            </assign>
+            <assign value="Double">
+                <output path="SerialNo/Type"/>
+            </assign>
+            <assign value="WarrantyDescription">
+                <output path="WarrantyDescription/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="WarrantyDescription/Type"/>
+            </assign>
+        </foreach>
+        <foreach>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/additionalInsuredDetails"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/AdditionalInsuredDetail/AdditionalInsuredDetail"/>
+            <move>
+                <input path="name" var="name"/>
+                <output path="AdditionalInsuredName/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <move>
+                <input path="value"/>
+                <output path="AdditionalInsuredAddress/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="GroupData">
+                <output path="Type"/>
+            </assign>
+            <assign value="AdditionalInsuredName">
+                <output path="AdditionalInsuredName/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="AdditionalInsuredName/Type"/>
+            </assign>
+            <assign value="AdditionalInsuredAddress">
+                <output path="AdditionalInsuredAddress/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="AdditionalInsuredAddress/Type"/>
+            </assign>
+        </foreach>
+        <foreach>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/otherDetails"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/OtherDetails/OtherDetails"/>
+            <assign value="Risk Location">
+                <output path="RiskLocation/Name"/>
+            </assign>
+            <move>
+                <input path="locationCode"/>
+                <output path="RiskLocation/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="Double">
+                <output path="RiskLocation/Type"/>
+            </assign>
+            <assign value="Risk Location Address">
+                <output path="RiskLocationAddress/Name"/>
+            </assign>
+            <move>
+                <input path="locationAddress"/>
+                <output path="RiskLocationAddress/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="String">
+                <output path="RiskLocationAddress/Type"/>
+            </assign>
+            <move>
+                <input path="city"/>
+                <output path="City/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="City">
+                <output path="City/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="City/Type"/>
+            </assign>
+            <assign value="Pincode">
+                <output path="Pincode/Name"/>
+            </assign>
+            <move>
+                <input path="pincode"/>
+                <output path="Pincode/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="Double">
+                <output path="Pincode/Type"/>
+            </assign>
+            <assign value="Type of equipment">
+                <output path="Typeofequipment/Name"/>
+            </assign>
+            <assign value="GroupData">
+                <output path="Type"/>
+            </assign>
+            <assign value="String">
+                <output path="Typeofequipment/Type"/>
+            </assign>
+            <move>
+                <input path="descriptionOfEquipment/equipment_name"/>
+                <output path="Typeofequipment/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="Identification Serial No">
+                <output path="IdentificationSerialNo/Name"/>
+            </assign>
+            <move>
+                <input path="descriptionOfEquipment/equipment_identification_no"/>
+                <output path="IdentificationSerialNo/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="String">
+                <output path="IdentificationSerialNo/Type"/>
+            </assign>
+            <assign value="Specification KVA HP Kg cm2">
+                <output path="SpecificationKVAHPKgcm2/Name"/>
+            </assign>
+            <assign>
+                <output path="SpecificationKVAHPKgcm2/Value"/>
+            </assign>
+            <assign value="String">
+                <output path="SpecificationKVAHPKgcm2/Type"/>
+            </assign>
+            <assign value="Make">
+                <output path="Make/Name"/>
+            </assign>
+            <move>
+                <input path="descriptionOfEquipment/equipment_make"/>
+                <output path="Make/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="String">
+                <output path="Make/Type"/>
+            </assign>
+            <move>
+                <input path="descriptionOfEquipment/equipment_model_no"/>
+                <output path="ModelNo/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="Model No">
+                <output path="ModelNo/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="ModelNo/Type"/>
+            </assign>
+            <assign value="Engine No">
+                <output path="EngineNo/Name"/>
+            </assign>
+            <assign>
+                <output path="EngineNo/Value"/>
+            </assign>
+            <assign value="String">
+                <output path="EngineNo/Type"/>
+            </assign>
+            <assign value="String">
+                <output path="ChasisNo/Type"/>
+            </assign>
+            <assign value="Chasis No">
+                <output path="ChasisNo/Name"/>
+            </assign>
+            <assign>
+                <output path="ChasisNo/Value"/>
+            </assign>
+            <assign value="String">
+                <output path="YearofManufacture/Type"/>
+            </assign>
+            <assign value="Year of Manufacture">
+                <output path="YearofManufacture/Name"/>
+            </assign>
+            <move>
+                <input path="descriptionOfEquipment/equipment_manufacturing_year"/>
+                <output path="YearofManufacture/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <move>
+                <input path="descriptionOfEquipment/equipment_quantity"/>
+                <output path="Quantity/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="Quantity">
+                <output path="Quantity/Name"/>
+            </assign>
+            <assign value="Double">
+                <output path="Quantity/Type"/>
+            </assign>
+            <assign value="Is there any AMC">
+                <output path="IsthereanyAMC/Name"/>
+            </assign>
+            <assign>
+                <output path="IsthereanyAMC/Value"/>
+            </assign>
+            <assign value="String">
+                <output path="IsthereanyAMC/Type"/>
+            </assign>
+            <assign value="Sum Insured">
+                <output path="SumInsured/Name"/>
+            </assign>
+            <assign value="Double">
+                <output path="SumInsured/Type"/>
+            </assign>
+            <assign value="Double">
+                <output path="TotalofSI/Type"/>
+            </assign>
+            <assign value="Total of SI">
+                <output path="TotalofSI/Name"/>
+            </assign>
+            <move>
+                <input path="descriptionOfEquipment/equipment_sum_insured"/>
+                <output path="SumInsured/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <convert>
+                <input path="totalSI"/>
+                <output path="TotalofSI/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </convert>
+            <assign value="Remarks">
+                <output path="Remarks/Name"/>
+            </assign>
+            <assign>
+                <output path="Remarks/Value"/>
+            </assign>
+            <assign value="String">
+                <output path="Remarks/Type"/>
+            </assign>
+        </foreach>
+        <assign value="Deductibles">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/Deductibles/Name"/>
+        </assign>
+        <assign value="GRP871">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/Deductibles/Value"/>
+        </assign>
+        <foreach>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/deductibles"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/Deductibles/Deductibles"/>
+            <assign value="GroupData">
+                <output path="Type"/>
+            </assign>
+            <assign value="Sr No">
+                <output path="SrNo/Name"/>
+            </assign>
+            <assign value="Double">
+                <output path="SrNo/Type"/>
+            </assign>
+            <convert>
+                <input path="serialNo"/>
+                <output path="SrNo/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </convert>
+            <assign value="Value of equipments">
+                <output path="Valueofequipments/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="Valueofequipments/Type"/>
+            </assign>
+            <move>
+                <input path="valueOfEquipment"/>
+                <output path="Valueofequipments/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="For claims arising out of AOG perils">
+                <output path="ForclaimsarisingoutofAOGperils/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="ForclaimsarisingoutofAOGperils/Type"/>
+            </assign>
+            <move>
+                <input path="claimsOutAogPerils"/>
+                <output path="ForclaimsarisingoutofAOGperils/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="For claims arising other than AOG out of perils">
+                <output path="ForclaimsarisingotherthanAOGoutofperils/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="ForclaimsarisingotherthanAOGoutofperils/Type"/>
+            </assign>
+            <move>
+                <input path="claimsOutOtherAogPerils"/>
+                <output path="ForclaimsarisingotherthanAOGoutofperils/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="Boom Section">
+                <output path="BoomSection/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="BoomSection/Type"/>
+            </assign>
+            <move>
+                <input path="boomSection"/>
+                <output path="BoomSection/Value"/>
+                <policy>
+                    <missingSource default="true"/>
+                    <emptySource default="true"/>
+                    <nilSource default="true"/>
+                </policy>
+            </move>
+            <assign value="For Machinery under Group V">
+                <output path="ForMachineryunderGroupV/Name"/>
+            </assign>
+            <assign value="String">
+                <output path="ForMachineryunderGroupV/Type"/>
+            </assign>
+            <assign>
+                <output path="ForMachineryunderGroupV/Value"/>
+            </assign>
+        </foreach>
+        <assign value="Other Details">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/OtherDetails/Name"/>
+        </assign>
+        <assign value="GRP99">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/OtherDetails/Value"/>
+        </assign>
+        <condition>
+            <if>
+                <input path="body/paceCPMGCProposalSync/paceCPMRequest/floaterCover" var="floaterCover"/>
+                <input path="body/paceCPMGCProposalSync/paceCPMRequest/addOnCovers" var="addOnCovers"/>
+                <input path="body/paceCPMGCProposalSync/paceCPMRequest/cpmGrid" var="cpmGrid"/>
+                <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/AddonCoversClauses" var="AddonCoversClauses"/>
+                <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/CPMGrid" var="CPMGrid"/>
+                <test lang="xpath">fn:boolean($floaterCover) and $floaterCover!='' and $floaterCover!='Yes'</test>
+                <assign value="Add on Covers/Clauses">
+                    <output path="$AddonCoversClauses/Name"/>
+                </assign>
+                <assign value="GRP870">
+                    <output path="$AddonCoversClauses/Value"/>
+                </assign>
+                <foreach>
+                    <input path="$addOnCovers/."/>
+                    <output path="$AddonCoversClauses/AddonCoversClauses"/>
+                    <assign value="GroupData">
+                        <output path="Type"/>
+                    </assign>
+                    <move>
+                        <input path="locationCode" var="locationCode"/>
+                        <output path="RiskLocation/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <assign value="Risk Location">
+                        <output path="RiskLocation/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="RiskLocation/Type"/>
+                    </assign>
+                    <move>
+                        <input path="locationAddress" var="locationAddress"/>
+                        <output path="RiskLocationAddress/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <assign value="Risk Location Address">
+                        <output path="RiskLocationAddress/Name"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="RiskLocationAddress/Type"/>
+                    </assign>
+                    <assign value="City">
+                        <output path="City/Name"/>
+                    </assign>
+                    <move>
+                        <input path="city" var="city"/>
+                        <output path="City/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <assign value="String">
+                        <output path="City/Type"/>
+                    </assign>
+                    <move>
+                        <input path="pincode" var="pincode"/>
+                        <output path="Pincode/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <assign value="Pincode">
+                        <output path="Pincode/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="Pincode/Type"/>
+                    </assign>
+                    <assign value="Add on Cover Name">
+                        <output path="AddonCoverName/Name"/>
+                    </assign>
+                    <move>
+                        <input path="CoverName" var="CoverName"/>
+                        <output path="AddonCoverName/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <assign value="String">
+                        <output path="AddonCoverName/Type"/>
+                    </assign>
+                    <assign value="Add on Type of Cover">
+                        <output path="AddonTypeofCover/Name"/>
+                    </assign>
+                    <assign value="Policy Level">
+                        <output path="AddonTypeofCover/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="AddonTypeofCover/Type"/>
+                    </assign>
+                    <assign value="Add on Sub Limit Amount or Sum Insured">
+                        <output path="AddonSubLimitAmountorSumInsured/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="AddonSubLimitAmountorSumInsured/Type"/>
+                    </assign>
+                    <convert>
+                        <input path="sumInsured" var="sumInsured"/>
+                        <output path="AddonSubLimitAmountorSumInsured/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                    <convert>
+                        <input path="rate" var="rate"/>
+                        <output path="AddonRate/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                    <assign value="Add on Rate">
+                        <output path="AddonRate/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="AddonRate/Type"/>
+                    </assign>
+                    <assign value="Add on Premium">
+                        <output path="AddonPremium/Name"/>
+                    </assign>
+                    <convert>
+                        <input path="premium" var="premium"/>
+                        <output path="AddonPremium/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                    <assign value="Double">
+                        <output path="AddonPremium/Type"/>
+                    </assign>
+                    <assign value="Endt Add on Suminsured">
+                        <output path="EndtAddonSuminsured/Name"/>
+                    </assign>
+                    <assign value="0">
+                        <output path="EndtAddonSuminsured/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="EndtAddonSuminsured/Type"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="EndtAddonRate/Type"/>
+                    </assign>
+                    <assign value="0">
+                        <output path="EndtAddonRate/Value"/>
+                    </assign>
+                    <assign value="Endt Add on Rate">
+                        <output path="EndtAddonRate/Name"/>
+                    </assign>
+                    <assign value="Endt Add on Premium">
+                        <output path="EndtAddonPremium/Name"/>
+                    </assign>
+                    <assign value="0">
+                        <output path="EndtAddonPremium/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="EndtAddonPremium/Type"/>
+                    </assign>
+                    <assign value="Others">
+                        <output path="Others/Name"/>
+                    </assign>
+                    <assign>
+                        <output path="Others/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="Others/Type"/>
+                    </assign>
+                    <assign value="Total Premium">
+                        <output path="TotalPremium/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="TotalPremium/Type"/>
+                    </assign>
+                    <convert>
+                        <input path="totalPremium" var="totalPremium"/>
+                        <output path="TotalPremium/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                    <assign value="Deletion of Cover with Retain Amount">
+                        <output path="DeletionofCoverwithRetainAmount/Name"/>
+                    </assign>
+                    <assign value="0">
+                        <output path="DeletionofCoverwithRetainAmount/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="DeletionofCoverwithRetainAmount/Type"/>
+                    </assign>
+                    <assign value="Any One Accident Limit">
+                        <output path="AnyOneAccidentLimit/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="AnyOneAccidentLimit/Type"/>
+                    </assign>
+                    <convert>
+                        <input path="sumInsured" var="sumInsured1"/>
+                        <output path="AnyOneAccidentLimit/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                </foreach>
+                <foreach>
+                    <input path="$cpmGrid/."/>
+                    <output path="$CPMGrid/CPMGrid"/>
+                    <assign value="GroupData">
+                        <output path="Type"/>
+                    </assign>
+                    <move>
+                        <input path="locationCode" var="locationCode1"/>
+                        <output path="RiskLocation/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <assign value="Risk Location">
+                        <output path="RiskLocation/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="RiskLocation/Type"/>
+                    </assign>
+                    <assign value="Risk Location Address">
+                        <output path="RiskLocationAddress/Name"/>
+                    </assign>
+                    <move>
+                        <input path="locationAddress" var="locationAddress1"/>
+                        <output path="RiskLocationAddress/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <assign value="String">
+                        <output path="RiskLocationAddress/Type"/>
+                    </assign>
+                    <move>
+                        <input path="city" var="city1"/>
+                        <output path="City/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <assign value="City">
+                        <output path="City/Name"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="City/Type"/>
+                    </assign>
+                    <assign value="Pincode">
+                        <output path="Pincode/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="Pincode/Type"/>
+                    </assign>
+                    <move>
+                        <input path="pincode" var="pincode1"/>
+                        <output path="Pincode/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <move>
+                        <input path="riskDescription" var="riskDescription"/>
+                        <output path="Riskdescription/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <assign value="Risk description">
+                        <output path="Riskdescription/Name"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="Riskdescription/Type"/>
+                    </assign>
+                    <assign value="Cover Name">
+                        <output path="CoverName/Name"/>
+                    </assign>
+                    <move>
+                        <input path="CoverName" var="CoverName1"/>
+                        <output path="CoverName/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <assign value="String">
+                        <output path="CoverName/Type"/>
+                    </assign>
+                    <convert>
+                        <input path="sumInsured" var="sumInsured2"/>
+                        <output path="SumInsured/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                    <assign value="Sum Insured">
+                        <output path="SumInsured/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="SumInsured/Type"/>
+                    </assign>
+                    <convert>
+                        <input path="rate" var="rate1"/>
+                        <output path="Rate/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                    <assign value="Double">
+                        <output path="Rate/Type"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="Premium/Type"/>
+                    </assign>
+                    <convert>
+                        <input path="premium" var="premium1"/>
+                        <output path="Premium/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                    <assign value="Rate">
+                        <output path="Rate/Name"/>
+                    </assign>
+                    <assign value="Premium">
+                        <output path="Premium/Name"/>
+                    </assign>
+                    <assign value="Endorsement SI">
+                        <output path="EndorsementSI/Name"/>
+                    </assign>
+                    <assign value="0">
+                        <output path="EndorsementSI/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="EndorsementSI/Type"/>
+                    </assign>
+                    <assign value="0">
+                        <output path="EndorsementRate/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="EndorsementRate/Type"/>
+                    </assign>
+                    <assign value="0">
+                        <output path="EndorsementPremium/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="EndorsementPremium/Type"/>
+                    </assign>
+                    <assign value="Endorsement Rate">
+                        <output path="EndorsementRate/Name"/>
+                    </assign>
+                    <assign value="Endorsement Premium">
+                        <output path="EndorsementPremium/Name"/>
+                    </assign>
+                    <assign value="Others">
+                        <output path="Others/Name"/>
+                    </assign>
+                    <assign>
+                        <output path="Others/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="Others/Type"/>
+                    </assign>
+                    <assign value="Total Premium">
+                        <output path="TotalPremium/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="TotalPremium/Type"/>
+                    </assign>
+                    <convert>
+                        <input path="totalPremium" var="totalPremium1"/>
+                        <output path="TotalPremium/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                    <assign value="Deletion of Cover with Retain Amount">
+                        <output path="DeletionofCoverwithRetainAmount/Name"/>
+                    </assign>
+                    <assign value="0">
+                        <output path="DeletionofCoverwithRetainAmount/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="DeletionofCoverwithRetainAmount/Type"/>
+                    </assign>
+                </foreach>
+                <assign value="CPM Grid">
+                    <output path="$CPMGrid/Name"/>
+                </assign>
+                <assign value="GRP925">
+                    <output path="$CPMGrid/Value"/>
+                </assign>
+            </if>
+            <else>
+                <input path="body/paceCPMGCProposalSync/paceCPMRequest/addOnCovers" var="addOnCovers1"/>
+                <input path="body/paceCPMGCProposalSync/paceCPMRequest/cpmGrid" var="cpmGrid1"/>
+                <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/CPMFloaterPolicyAddonCoversClausesGrid" var="CPMFloaterPolicyAddonCoversClausesGrid1"/>
+                <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/CPMFloaterPolicyGrid" var="CPMFloaterPolicyGrid1"/>
+                <foreach>
+                    <input path="$addOnCovers1/."/>
+                    <output path="$CPMFloaterPolicyAddonCoversClausesGrid1/CPMFloaterPolicyAddonCoversClausesGrid"/>
+                    <assign value="GroupData">
+                        <output path="Type"/>
+                    </assign>
+                    <move>
+                        <input path="locationCode"/>
+                        <output path="RiskLocation/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <assign value="Risk Location">
+                        <output path="RiskLocation/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="RiskLocation/Type"/>
+                    </assign>
+                    <move>
+                        <input path="locationAddress"/>
+                        <output path="RiskLocationAddress/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <assign value="Risk Location Address">
+                        <output path="RiskLocationAddress/Name"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="RiskLocationAddress/Type"/>
+                    </assign>
+                    <assign value="City">
+                        <output path="City/Name"/>
+                    </assign>
+                    <move>
+                        <input path="city"/>
+                        <output path="City/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <assign value="String">
+                        <output path="City/Type"/>
+                    </assign>
+                    <move>
+                        <input path="pincode"/>
+                        <output path="Pincode/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <assign value="Pincode">
+                        <output path="Pincode/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="Pincode/Type"/>
+                    </assign>
+                    <assign value="Add on Cover Name">
+                        <output path="AddonCoverName/Name"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="AddonCoverName/Type"/>
+                    </assign>
+                    <move>
+                        <input path="CoverName"/>
+                        <output path="AddonCoverName/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <assign value="Add on Type of Cover">
+                        <output path="AddonTypeofCover/Name"/>
+                    </assign>
+                    <assign value="Policy Level">
+                        <output path="AddonTypeofCover/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="AddonTypeofCover/Type"/>
+                    </assign>
+                    <assign value="Add on Sub Limit Amount or Sum Insured">
+                        <output path="AddonSubLimitAmountorSumInsured/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="AddonSubLimitAmountorSumInsured/Type"/>
+                    </assign>
+                    <convert>
+                        <input path="sumInsured"/>
+                        <output path="AddonSubLimitAmountorSumInsured/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                    <convert>
+                        <input path="rate"/>
+                        <output path="AddonRate/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                    <convert>
+                        <input path="premium"/>
+                        <output path="AddonPremium/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                    <convert>
+                        <input path="totalPremium"/>
+                        <output path="TotalPremium/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                    <assign value="Add on Rate">
+                        <output path="AddonRate/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="AddonRate/Type"/>
+                    </assign>
+                    <assign value="Add on Premium">
+                        <output path="AddonPremium/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="AddonPremium/Type"/>
+                    </assign>
+                    <assign value="Endt Add on Suminsured">
+                        <output path="EndtAddonSuminsured/Name"/>
+                    </assign>
+                    <assign value="0">
+                        <output path="EndtAddonSuminsured/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="EndtAddonSuminsured/Type"/>
+                    </assign>
+                    <assign value="Endt Add on Rate">
+                        <output path="EndtAddonRate/Name"/>
+                    </assign>
+                    <assign value="0">
+                        <output path="EndtAddonRate/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="EndtAddonRate/Type"/>
+                    </assign>
+                    <assign value="Endt Add on Premium">
+                        <output path="EndtAddonPremium/Name"/>
+                    </assign>
+                    <assign value="0">
+                        <output path="EndtAddonPremium/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="EndtAddonPremium/Type"/>
+                    </assign>
+                    <assign value="Others">
+                        <output path="Others/Name"/>
+                    </assign>
+                    <assign>
+                        <output path="Others/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="Others/Type"/>
+                    </assign>
+                    <assign value="Total Premium">
+                        <output path="TotalPremium/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="TotalPremium/Type"/>
+                    </assign>
+                    <assign value="Deletion of Cover with Retain Amount">
+                        <output path="DeletionofCoverwithRetainAmount/Name"/>
+                    </assign>
+                    <assign value="0">
+                        <output path="DeletionofCoverwithRetainAmount/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="DeletionofCoverwithRetainAmount/Type"/>
+                    </assign>
+                    <assign value="Any One Accident Limit">
+                        <output path="AnyOneAccidentLimit/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="AnyOneAccidentLimit/Type"/>
+                    </assign>
+                    <convert>
+                        <input path="sumInsured"/>
+                        <output path="AnyOneAccidentLimit/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                </foreach>
+                <foreach>
+                    <input path="$cpmGrid1/."/>
+                    <output path="$CPMFloaterPolicyGrid1/CPMFloaterPolicyGrid"/>
+                    <assign value="GroupData">
+                        <output path="Type"/>
+                    </assign>
+                    <move>
+                        <input path="locationCode"/>
+                        <output path="FloaterRiskLocation/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <move>
+                        <input path="locationAddress"/>
+                        <output path="FloaterRiskLocationAddress/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <move>
+                        <input path="city"/>
+                        <output path="City/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <move>
+                        <input path="pincode"/>
+                        <output path="Pincode/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <move>
+                        <input path="riskDescription"/>
+                        <output path="Riskdescription/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <move>
+                        <input path="CoverName"/>
+                        <output path="CoverName/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </move>
+                    <convert>
+                        <input path="sumInsured"/>
+                        <output path="SumInsured/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                    <convert>
+                        <input path="rate"/>
+                        <output path="Rate/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                    <convert>
+                        <input path="premium"/>
+                        <output path="Premium/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                    <convert>
+                        <input path="totalPremium"/>
+                        <output path="TotalPremium/Value"/>
+                        <policy>
+                            <missingSource default="true"/>
+                            <emptySource default="true"/>
+                            <nilSource default="true"/>
+                        </policy>
+                    </convert>
+                    <assign value="Risk Location">
+                        <output path="FloaterRiskLocation/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="FloaterRiskLocation/Type"/>
+                    </assign>
+                    <assign value="Risk Location Address">
+                        <output path="FloaterRiskLocationAddress/Name"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="FloaterRiskLocationAddress/Type"/>
+                    </assign>
+                    <assign value="City">
+                        <output path="City/Name"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="City/Type"/>
+                    </assign>
+                    <assign value="Pincode">
+                        <output path="Pincode/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="Pincode/Type"/>
+                    </assign>
+                    <assign value="Risk description">
+                        <output path="Riskdescription/Name"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="Riskdescription/Type"/>
+                    </assign>
+                    <assign value="Cover Name">
+                        <output path="CoverName/Name"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="CoverName/Type"/>
+                    </assign>
+                    <assign value="Sum Insured">
+                        <output path="SumInsured/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="SumInsured/Type"/>
+                    </assign>
+                    <assign value="Rate">
+                        <output path="Rate/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="Rate/Type"/>
+                    </assign>
+                    <assign value="Premium">
+                        <output path="Premium/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="Premium/Type"/>
+                    </assign>
+                    <assign value="Endorsement SI">
+                        <output path="EndorsementSI/Name"/>
+                    </assign>
+                    <assign value="0">
+                        <output path="EndorsementSI/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="EndorsementSI/Type"/>
+                    </assign>
+                    <assign value="Endorsement Rate">
+                        <output path="EndorsementRate/Name"/>
+                    </assign>
+                    <assign value="0">
+                        <output path="EndorsementRate/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="EndorsementRate/Type"/>
+                    </assign>
+                    <assign value="Endorsement Premium">
+                        <output path="EndorsementPremium/Name"/>
+                    </assign>
+                    <assign value="0">
+                        <output path="EndorsementPremium/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="EndorsementPremium/Type"/>
+                    </assign>
+                    <assign value="Others">
+                        <output path="Others/Name"/>
+                    </assign>
+                    <assign>
+                        <output path="Others/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="Others/Type"/>
+                    </assign>
+                    <assign value="Total Premium">
+                        <output path="TotalPremium/Name"/>
+                    </assign>
+                    <assign value="Double">
+                        <output path="TotalPremium/Type"/>
+                    </assign>
+                    <assign value="Deletion of Cover with Retain Amount">
+                        <output path="DeletionofCoverwithRetainAmount/Name"/>
+                    </assign>
+                    <assign value="0">
+                        <output path="DeletionofCoverwithRetainAmount/Value"/>
+                    </assign>
+                    <assign value="String">
+                        <output path="DeletionofCoverwithRetainAmount/Type"/>
+                    </assign>
+                </foreach>
+                <assign value="CPM Floater Policy Add on Covers/Clauses Grid">
+                    <output path="$CPMFloaterPolicyAddonCoversClausesGrid1/Name"/>
+                </assign>
+                <assign value="GRP928">
+                    <output path="$CPMFloaterPolicyAddonCoversClausesGrid1/Value"/>
+                </assign>
+                <assign value="CPM Floater Policy Grid">
+                    <output path="$CPMFloaterPolicyGrid1/Name"/>
+                </assign>
+                <assign value="GRP927">
+                    <output path="$CPMFloaterPolicyGrid1/Value"/>
+                </assign>
+            </else>
+        </condition>
+        <assign value="application/json">
+            <output path="headers/HTTPHeader/control/MediaType"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/EsbDefaultParams/applicationNo"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_RelationshipType"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/EsbDefaultParams/source"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/source"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/EsbDefaultParams/campaign"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/campaign"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/EsbDefaultParams/medium"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/medium"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/GCApplicationNo"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralNodes_ApplicationNo"/>
+            <policy>
+                <missingSource default="true"/>
+                <emptySource default="true"/>
+                <nilSource default="true"/>
+            </policy>
+        </move>
+        <assign value="false">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropEndorsementDtls_ValuationReport"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/ticketNumber"/>
+            <output path="context/shared/itTicketNumber"/>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/EsbDefaultParams/loggingModule"/>
+            <output path="context/shared/loggingModule"/>
+        </move>
+        <create empty="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_Remarks"/>
+        </create>
+        <create empty="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_ChannelType"/>
+        </create>
+        <assign value="Khare, Sudhir">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_UWName"/>
+        </assign>
+        <create empty="true">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_CertificateNumber"/>
+        </create>
+        <assign value="0.0">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropDistributionChannel_ServiceProvider"/>
+        </assign>
+        <assign value="0.0">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropDistributionChannel_Commision"/>
+        </assign>
+        <assign value="0.0">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropDistributionChannel_TERRORISMCOMMISSION"/>
+        </assign>
+        <assign value="5.0">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_PaidupCapital"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/proposalDate"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_ProposalDate_Mandatary"/>
+        </move>
+        <move>
+            <input path="headers/SMOHeader"/>
+            <output path="headers/SMOHeader"/>
+        </move>
+        <assign value="IPDSTotalPRemium">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/IPDSTotalPRemium/Name"/>
+        </assign>
+        <assign value="GRP1165">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/IPDSTotalPRemium/Value"/>
+        </assign>
+        <assign value="GroupData">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/IPDSTotalPRemium/IPDSTotalPRemium/Type"/>
+        </assign>
+        <assign value="IPDSTotalPRemium">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/IPDSTotalPRemium/IPDSTotalPRemium/IPDSTotalPRemium/Name"/>
+        </assign>
+        <assign value="Double">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/IPDSTotalPRemium/IPDSTotalPRemium/IPDSTotalPRemium/Type"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/totalPremium"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/IPDSTotalPRemium/IPDSTotalPRemium/IPDSTotalPRemium/Value"/>
+        </move>
+        <assign value="GRP1165">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/NetPremium/Value"/>
+        </assign>
+        <assign value="NetPremium">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/NetPremium/Name"/>
+        </assign>
+        <assign value="GroupData">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/NetPremium/NetPremium/Type"/>
+        </assign>
+        <assign value="Double">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/NetPremium/NetPremium/UniqueIdentificationNumber/Type"/>
+        </assign>
+        <assign value="Double">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/NetPremium/NetPremium/GST/Type"/>
+        </assign>
+        <assign value="Double">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/NetPremium/NetPremium/NetPremium/Type"/>
+        </assign>
+        <assign value="NetPremium">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/NetPremium/NetPremium/NetPremium/Name"/>
+        </assign>
+        <assign value="GST">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/NetPremium/NetPremium/GST/Name"/>
+        </assign>
+        <assign value="UniqueIdentificationNumber">
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/NetPremium/NetPremium/UniqueIdentificationNumber/Name"/>
+        </assign>
+        <move>
+            <input path="body/paceCPMGCProposalSync/EsbDefaultParams/applicationNo"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/NetPremium/NetPremium/UniqueIdentificationNumber/Value"/>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/totalTaxValue"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/NetPremium/NetPremium/GST/Value"/>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/netPremium"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/otherDetailsGridXML/Root/OtherDetailsGrid/NetPremium/NetPremium/NetPremium/Value"/>
+        </move>
+        <move>
+            <input path="body/paceCPMGCProposalSync/paceCPMRequest/customerTypeSegmentation" var="customerTypeSegmentation"/>
+            <output path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropRisks_CustomerType"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

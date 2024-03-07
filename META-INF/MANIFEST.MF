@@ -1,4 +1,5 @@
 Manifest-Version: 1.0
-Class-Path: Impl-GcCpmLibrary.jar
+Class-Path: Impl-AuditLibrary.jar 
+ Impl-GcCpmLibrary.jar
 Created-By: 1.5.0 (IBM Corporation)
 

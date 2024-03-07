@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" targetNamespace="http://Impl-CpmSaveProposal/com/tagic/gc/cpm/xslt/cpm_req_format_map" version="8.0.5.0" xmlns:map="http://Impl-CpmSaveProposal/com/tagic/gc/cpm/xslt/cpm_req_format_map">
+    <input correlationContext="" message="{http://Impl-GcCpmLibrary/GCIntegrationCPM}cpmGCProposalSyncRequestMsg" sharedContext="{http://Impl-GcCpm}cpmSharedBO" smoName="wsdl-primary" transientContext="" type="smo" types="" xpath="/"/>
+    <output correlationContext="" message="{http://Impl-AuditLibrary/RequestFormatting}cpmRequestFormatRequestMsg" sharedContext="{http://Impl-GcCpm}cpmSharedBO" smoName="wsdl-primary" transientContext="" type="smo" types="" xpath="/"/>
+    <imports>
+        <import kind="java" location="com.tagic.hnb.Transform" namespace="xalan://com.tagic.hnb.Transform"/>
+    </imports>
+    <namespaces>
+        <namespace kind="supplement" prefix="io7" uri="http://Impl-GcCpm"/>
+        <namespace kind="supplement" prefix="io6" uri="http://www.ibm.com/xmlns/prod/websphere/http/sca/6.1.0"/>
+        <namespace kind="supplement" prefix="in" uri="wsdl.http://Impl-GcCpmLibrary/GCIntegrationCPM"/>
+        <namespace kind="supplement" prefix="io" uri="http://www.w3.org/2005/08/addressing"/>
+        <namespace kind="supplement" prefix="io3" uri="http://schemas.xmlsoap.org/ws/2004/08/addressing"/>
+        <namespace kind="supplement" prefix="in2" uri="http://Impl-GcCpmLibrary/GCIntegrationCPM"/>
+        <namespace kind="supplement" prefix="io2" uri="http://www.w3.org/2003/05/soap-envelope"/>
+        <namespace kind="supplement" prefix="io5" uri="http://www.ibm.com/xmlns/prod/websphere/mq/sca/6.0.0"/>
+        <namespace kind="supplement" prefix="io4" uri="http://www.ibm.com/websphere/sibx/smo/v6.0.1"/>
+        <namespace kind="supplement" prefix="in3" uri="http://Impl-GcCpmLibrary"/>
+        <namespace kind="supplement" prefix="out2" uri="http://Impl-AuditLibrary/RequestFormatting"/>
+        <namespace kind="supplement" prefix="out" uri="wsdl.http://Impl-AuditLibrary/RequestFormatting"/>
+        <namespace kind="extension" prefix="Transform" uri="xalan://com.tagic.hnb.Transform"/>
+    </namespaces>
+    <generation engine="xslt2"/>
+    <mappingDeclaration name="cpm_req_format_map">
+        <input namespace="http://www.ibm.com/websphere/sibx/smo/v6.0.1" path="smo"/>
+        <output namespace="http://www.ibm.com/websphere/sibx/smo/v6.0.1" path="smo"/>
+        <move>
+            <input path="context/shared"/>
+            <output path="context/shared"/>
+        </move>
+        <customFunction lang="java" ref="Transform:transformXMLToString">
+            <input path="body/cpmGCProposalSync/cpmGCRequest" var="cpmGCRequest1"/>
+            <output path="body/cpmRequestFormat/cpmReqInput"/>
+            <param name="transformNode" value="$cpmGCRequest1"/>
+        </customFunction>
+    </mappingDeclaration>
+</mappingRoot>

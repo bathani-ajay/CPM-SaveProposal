@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mediationFlow xmlns="http://www.ibm.com/xmlns/prod/websphere/2010/MediationFlow" xmlns:RequestFormatting="http://Impl-AuditLibrary/RequestFormatting" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://Impl-GcCpmLibrary/PaceGCCPMIntegration" xmlns:ns2="http://Impl-GcCpmLibrary/GCIntegrationCPM" xmlns:ns3="http://Impl-AuditLibrary/AuditLoggingServices" name="CPMProposalSyncMediation" targetNamespace="http://Impl-GcCpm/CPMProposalSyncMediation">
+  <import location="PaceGCCPMIntegration.wsdl" namespace="http://Impl-GcCpmLibrary/PaceGCCPMIntegration"/>
+  <import location="GCIntegrationCPM.wsdl" namespace="http://Impl-GcCpmLibrary/GCIntegrationCPM"/>
+  <import location="AuditLoggingServices.wsdl" namespace="http://Impl-AuditLibrary/AuditLoggingServices"/>
+  <import location="RequestFormatting.wsdl" namespace="http://Impl-AuditLibrary/RequestFormatting"/>
+  <promotedProperty name="CPMProposalSyncInvoke.asyncTimeout" group="Impl-GcCpm.CPMProposalSyncMediation" value="15"/>
+  <promotedProperty name="ServiceInvoke1.retryOn" group="Impl-GcCpm.CPMProposalSyncMediation" value="0"/>
+  <promotedProperty name="ServiceInvoke1.retryCount" group="Impl-GcCpm.CPMProposalSyncMediation" value="0"/>
+  <promotedProperty name="ServiceInvoke1.retryDelay" group="Impl-GcCpm.CPMProposalSyncMediation" value="0"/>
+  <promotedProperty name="ServiceInvoke1.retryOn1" group="Impl-GcCpm.CPMProposalSyncMediation" value="0"/>
+  <promotedProperty name="ServiceInvoke1.retryCount1" group="Impl-GcCpm.CPMProposalSyncMediation" value="0"/>
+  <promotedProperty name="ServiceInvoke1.retryDelay1" group="Impl-GcCpm.CPMProposalSyncMediation" value="0"/>
+  <promotedProperty name="ServiceInvoke1.retryOn2" group="Impl-GcCpm.CPMProposalSyncMediation" value="0"/>
+  <promotedProperty name="ServiceInvoke1.retryCount2" group="Impl-GcCpm.CPMProposalSyncMediation" value="0"/>
+  <promotedProperty name="ServiceInvoke1.retryDelay2" group="Impl-GcCpm.CPMProposalSyncMediation" value="0"/>
+  <promotedProperty name="cpm_request_trace.file2" group="Impl-GcCpm.CPMProposalSyncMediation" value="cpm_request_response.txt"/>
+  <promotedProperty name="cpm_error_trace.file1" group="Impl-GcCpm.CPMProposalSyncMediation" value="cpm_request_response.txt"/>
+  <promotedProperty name="cpm_response_trace.file" group="Impl-GcCpm.CPMProposalSyncMediation" value="cpm_request_response.txt"/>
+  <promotedProperty name="ServiceInvoke1.retryOn3" group="Impl-CpmSaveProposal.CPMProposalSyncMediation" value="0"/>
+  <promotedProperty name="ServiceInvoke1.retryCount3" group="Impl-CpmSaveProposal.CPMProposalSyncMediation" value="0"/>
+  <promotedProperty name="ServiceInvoke1.retryDelay3" group="Impl-CpmSaveProposal.CPMProposalSyncMediation" value="0"/>
+  <reference name="GCIntegrationCPMPartner" portType="ns2:GCIntegrationCPM"/>
+  <reference name="AuditLoggingServicesPartner" portType="ns3:AuditLoggingServices"/>
+  <reference name="RequestFormattingPartner" portType="RequestFormatting:RequestFormatting"/>
+  <interface portType="ns1:PaceGCCPMIntegration">
+    <operation name="paceCPMGCProposalSync">
+      <requestFlow>
+        <node displayName="paceCPMGCProposalSync : PaceGCCPMIntegration" name="PaceGCCPMIntegration_paceCPMGCProposalSync_Input" type="Input">
+          <property name="sharedContext" value="{http://Impl-GcCpm}cpmSharedBO"/>
+          <outputTerminal type="ns1:paceCPMGCProposalSyncRequestMsg">
+            <wire targetNode="CPMRequestMap"/>
+          </outputTerminal>
+        </node>
+        <node displayName="paceCPMGCProposalSync : PaceGCCPMIntegration" name="PaceGCCPMIntegration_paceCPMGCProposalSync_InputResponse" type="InputResponse">
+          <inputTerminal type="ns1:paceCPMGCProposalSyncResponseMsg"/>
+        </node>
+        <node name="CPMProposalSyncInvoke" type="ServiceInvoke">
+          <property name="referenceName" value="GCIntegrationCPMPartner"/>
+          <property name="operationName" value="cpmGCProposalSync"/>
+          <property name="useDynamicEndpoint" value="false"/>
+          <property name="asyncTimeout" promotedPropertyGroup="Impl-GcCpm.CPMProposalSyncMediation" promotedPropertyName="CPMProposalSyncInvoke.asyncTimeout"/>
+          <property name="retryOn" promotedPropertyGroup="Impl-GcCpm.CPMProposalSyncMediation" promotedPropertyName="ServiceInvoke1.retryOn"/>
+          <property name="retryCount" promotedPropertyGroup="Impl-GcCpm.CPMProposalSyncMediation" promotedPropertyName="ServiceInvoke1.retryCount"/>
+          <property name="retryDelay" promotedPropertyGroup="Impl-GcCpm.CPMProposalSyncMediation" promotedPropertyName="ServiceInvoke1.retryDelay"/>
+          <inputTerminal type="ns2:cpmGCProposalSyncRequestMsg"/>
+          <outputTerminal type="ns2:cpmGCProposalSyncResponseMsg">
+            <wire targetNode="FanOut2"/>
+          </outputTerminal>
+          <outputTerminal name="timeout" type="ns2:cpmGCProposalSyncRequestMsg">
+            <wire targetNode="FanOut3"/>
+          </outputTerminal>
+          <failTerminal>
+            <wire targetNode="FanOut3"/>
+          </failTerminal>
+        </node>
+        <node name="CPMRequestMap" type="XSLTransformation">
+          <property name="root" value="/"/>
+          <property name="XSLTransform" value="com/tagic/gc/cpm/xslt/CPMRequestMap.xsl"/>
+          <property name="XMXMap" value="com/tagic/gc/cpm/xslt/CPMRequestMap.map"/>
+          <property name="SMOVersion" value="SMO61"/>
+          <inputTerminal type="ns1:paceCPMGCProposalSyncRequestMsg"/>
+          <outputTerminal type="ns2:cpmGCProposalSyncRequestMsg">
+            <wire targetNode="FanOut1"/>
+          </outputTerminal>
+          <failTerminal/>
+        </node>
+        <node name="FanOut1" type="FanOut">
+          <inputTerminal/>
+          <outputTerminal explicitType="false" type="ns2:cpmGCProposalSyncRequestMsg">
+            <wire targetNode="cpm_req_format_map"/>
+            <wire targetNode="CPMReqLog"/>
+            <wire targetNode="CPMProposalSyncInvoke"/>
+          </outputTerminal>
+          <outputTerminal explicitType="false" name="noOccurrences" type="ns2:cpmGCProposalSyncRequestMsg"/>
+          <failTerminal/>
+        </node>
+        <node name="ReqAuditLog" type="ServiceInvoke">
+          <property name="referenceName" value="AuditLoggingServicesPartner"/>
+          <property name="operationName" value="upsertServiceLog"/>
+          <property name="retryOn" promotedPropertyGroup="Impl-GcCpm.CPMProposalSyncMediation" promotedPropertyName="ServiceInvoke1.retryOn1"/>
+          <property name="retryCount" promotedPropertyGroup="Impl-GcCpm.CPMProposalSyncMediation" promotedPropertyName="ServiceInvoke1.retryCount1"/>
+          <property name="retryDelay" promotedPropertyGroup="Impl-GcCpm.CPMProposalSyncMediation" promotedPropertyName="ServiceInvoke1.retryDelay1"/>
+          <inputTerminal type="ns3:upsertServiceLogRequestMsg"/>
+          <outputTerminal type="ns3:upsertServiceLogResponseMsg">
+            <wire targetNode="CPMReqResLog"/>
+          </outputTerminal>
+          <outputTerminal name="timeout" type="ns3:upsertServiceLogRequestMsg">
+            <wire targetNode="Stop1"/>
+          </outputTerminal>
+          <failTerminal>
+            <wire targetNode="Stop1"/>
+          </failTerminal>
+        </node>
+        <node name="CPMReqLog" type="XSLTransformation">
+          <property name="root" value="/"/>
+          <property name="XSLTransform" value="com/tagic/gc/cpm/xslt/ReqLog.xsl"/>
+          <property name="XMXMap" value="com/tagic/gc/cpm/xslt/ReqLog.map"/>
+          <property name="SMOVersion" value="SMO61"/>
+          <inputTerminal type="ns2:cpmGCProposalSyncRequestMsg"/>
+          <outputTerminal type="ns3:upsertServiceLogRequestMsg">
+            <wire targetNode="ReqAuditLog"/>
+          </outputTerminal>
+          <failTerminal/>
+        </node>
+        <node name="Stop1" type="Stop">
+          <inputTerminal type="XMLSchema:anyType"/>
+        </node>
+        <node name="CPMReqResLog" type="XSLTransformation">
+          <property name="root" value="/"/>
+          <property name="XSLTransform" value="com/tagic/gc/cpm/xslt/CPMReqResLog.xsl"/>
+          <property name="XMXMap" value="com/tagic/gc/cpm/xslt/CPMReqResLog.map"/>
+          <property name="SMOVersion" value="SMO61"/>
+          <inputTerminal type="ns3:upsertServiceLogResponseMsg"/>
+          <outputTerminal type="ns3:upsertServiceLogResponseMsg">
+            <wire targetNode="Stop1"/>
+          </outputTerminal>
+          <failTerminal/>
+        </node>
+        <node name="CPMResponse" type="XSLTransformation">
+          <property name="root" value="/"/>
+          <property name="XSLTransform" value="com/tagic/gc/cpm/xslt/CPMResponse.xsl"/>
+          <property name="XMXMap" value="com/tagic/gc/cpm/xslt/CPMResponse.map"/>
+          <property name="SMOVersion" value="SMO61"/>
+          <inputTerminal type="ns2:cpmGCProposalSyncResponseMsg"/>
+          <outputTerminal type="ns1:paceCPMGCProposalSyncResponseMsg">
+            <wire targetNode="PaceGCCPMIntegration_paceCPMGCProposalSync_InputResponse"/>
+          </outputTerminal>
+          <failTerminal/>
+        </node>
+        <node name="ResAuditLog" type="ServiceInvoke">
+          <property name="referenceName" value="AuditLoggingServicesPartner"/>
+          <property name="operationName" value="upsertServiceLog"/>
+          <property name="retryOn" promotedPropertyGroup="Impl-GcCpm.CPMProposalSyncMediation" promotedPropertyName="ServiceInvoke1.retryOn2"/>
+          <property name="retryCount" promotedPropertyGroup="Impl-GcCpm.CPMProposalSyncMediation" promotedPropertyName="ServiceInvoke1.retryCount2"/>
+          <property name="retryDelay" promotedPropertyGroup="Impl-GcCpm.CPMProposalSyncMediation" promotedPropertyName="ServiceInvoke1.retryDelay2"/>
+          <inputTerminal type="ns3:upsertServiceLogRequestMsg"/>
+          <outputTerminal type="ns3:upsertServiceLogResponseMsg">
+            <wire targetNode="Stop2"/>
+          </outputTerminal>
+          <outputTerminal name="timeout" type="ns3:upsertServiceLogRequestMsg">
+            <wire targetNode="Stop2"/>
+          </outputTerminal>
+          <failTerminal>
+            <wire targetNode="Stop2"/>
+          </failTerminal>
+        </node>
+        <node name="CPMResLog" type="XSLTransformation">
+          <property name="root" value="/"/>
+          <property name="XSLTransform" value="com/tagic/gc/cpm/xslt/CPMResLog.xsl"/>
+          <property name="XMXMap" value="com/tagic/gc/cpm/xslt/CPMResLog.map"/>
+          <property name="SMOVersion" value="SMO61"/>
+          <inputTerminal type="ns2:cpmGCProposalSyncResponseMsg"/>
+          <outputTerminal type="ns3:upsertServiceLogRequestMsg">
+            <wire targetNode="ResAuditLog"/>
+          </outputTerminal>
+          <failTerminal/>
+        </node>
+        <node name="Stop2" type="Stop">
+          <inputTerminal type="XMLSchema:anyType"/>
+        </node>
+        <node name="CPMErrorLog" type="XSLTransformation">
+          <property name="root" value="/"/>
+          <property name="XSLTransform" value="com/tagic/gc/cpm/xslt/CPMErrorLog.xsl"/>
+          <property name="XMXMap" value="com/tagic/gc/cpm/xslt/CPMErrorLog.map"/>
+          <property name="SMOVersion" value="SMO61"/>
+          <inputTerminal type="ns2:cpmGCProposalSyncRequestMsg"/>
+          <outputTerminal type="ns3:upsertServiceLogRequestMsg">
+            <wire targetNode="ResAuditLog"/>
+          </outputTerminal>
+          <failTerminal/>
+        </node>
+        <node name="FanOut2" type="FanOut">
+          <inputTerminal/>
+          <outputTerminal explicitType="false" type="ns2:cpmGCProposalSyncResponseMsg">
+            <wire targetNode="CPMResLog"/>
+            <wire targetNode="cpm_response_trace"/>
+            <wire targetNode="CPMResponse"/>
+          </outputTerminal>
+          <outputTerminal explicitType="false" name="noOccurrences" type="ns2:cpmGCProposalSyncResponseMsg"/>
+          <failTerminal/>
+        </node>
+        <node name="FanOut3" type="FanOut">
+          <inputTerminal/>
+          <outputTerminal explicitType="false" type="ns2:cpmGCProposalSyncRequestMsg">
+            <wire targetNode="CPMErrorLog"/>
+            <wire targetNode="cpm_error_trace"/>
+            <wire targetNode="CPMErrorRes"/>
+          </outputTerminal>
+          <outputTerminal explicitType="false" name="noOccurrences" type="ns2:cpmGCProposalSyncRequestMsg"/>
+          <failTerminal/>
+        </node>
+        <node name="CPMErrorRes" type="XSLTransformation">
+          <property name="root" value="/"/>
+          <property name="XSLTransform" value="com/tagic/gc/cpm/xslt/CPMErrorRes.xsl"/>
+          <property name="XMXMap" value="com/tagic/gc/cpm/xslt/CPMErrorRes.map"/>
+          <property name="SMOVersion" value="SMO61"/>
+          <inputTerminal type="ns2:cpmGCProposalSyncRequestMsg"/>
+          <outputTerminal type="ns1:paceCPMGCProposalSyncResponseMsg">
+            <wire targetNode="PaceGCCPMIntegration_paceCPMGCProposalSync_InputResponse"/>
+          </outputTerminal>
+          <failTerminal/>
+        </node>
+        <node name="cpm_request_trace" type="Trace">
+          <property name="destination" value="2"/>
+          <property name="file" promotedPropertyGroup="Impl-GcCpm.CPMProposalSyncMediation" promotedPropertyName="cpm_request_trace.file2"/>
+          <property name="root" value="/context/shared/traceLog"/>
+          <inputTerminal/>
+          <outputTerminal>
+            <wire targetNode="Stop1"/>
+          </outputTerminal>
+          <failTerminal>
+            <wire targetNode="Stop1"/>
+          </failTerminal>
+        </node>
+        <node name="cpm_error_trace" type="Trace">
+          <property name="destination" value="2"/>
+          <property name="file" promotedPropertyGroup="Impl-GcCpm.CPMProposalSyncMediation" promotedPropertyName="cpm_error_trace.file1" value="cpm_request_response.txt"/>
+          <property name="root" value="/context/shared/traceLog"/>
+          <inputTerminal/>
+          <outputTerminal>
+            <wire targetNode="Stop2"/>
+          </outputTerminal>
+          <failTerminal>
+            <wire targetNode="Stop2"/>
+          </failTerminal>
+        </node>
+        <node name="cpm_response_trace" type="Trace">
+          <property name="destination" value="2"/>
+          <property name="file" promotedPropertyGroup="Impl-GcCpm.CPMProposalSyncMediation" promotedPropertyName="cpm_response_trace.file" value="cpm_request_response.txt"/>
+          <property name="root" value="/context/shared/traceLog"/>
+          <inputTerminal/>
+          <outputTerminal>
+            <wire targetNode="Stop2"/>
+          </outputTerminal>
+          <failTerminal>
+            <wire targetNode="Stop2"/>
+          </failTerminal>
+        </node>
+        <node name="cpm_req_format" type="ServiceInvoke">
+          <property name="referenceName" value="RequestFormattingPartner"/>
+          <property name="operationName" value="cpmRequestFormat"/>
+          <property name="retryOn" promotedPropertyGroup="Impl-CpmSaveProposal.CPMProposalSyncMediation" promotedPropertyName="ServiceInvoke1.retryOn3"/>
+          <property name="retryCount" promotedPropertyGroup="Impl-CpmSaveProposal.CPMProposalSyncMediation" promotedPropertyName="ServiceInvoke1.retryCount3"/>
+          <property name="retryDelay" promotedPropertyGroup="Impl-CpmSaveProposal.CPMProposalSyncMediation" promotedPropertyName="ServiceInvoke1.retryDelay3"/>
+          <inputTerminal type="RequestFormatting:cpmRequestFormatRequestMsg"/>
+          <outputTerminal type="RequestFormatting:cpmRequestFormatResponseMsg">
+            <wire targetNode="cpm_res_format_map"/>
+          </outputTerminal>
+          <outputTerminal name="timeout" type="RequestFormatting:cpmRequestFormatRequestMsg">
+            <wire targetNode="Stop1"/>
+          </outputTerminal>
+          <failTerminal>
+            <wire targetNode="Stop1"/>
+          </failTerminal>
+        </node>
+        <node name="cpm_req_format_map" type="XSLTransformation">
+          <property name="root" value="/"/>
+          <property name="XSLTransform" value="com/tagic/gc/cpm/xslt/cpm_req_format_map.xsl"/>
+          <property name="XMXMap" value="com/tagic/gc/cpm/xslt/cpm_req_format_map.map"/>
+          <property name="SMOVersion" value="SMO61"/>
+          <inputTerminal type="ns2:cpmGCProposalSyncRequestMsg"/>
+          <outputTerminal type="RequestFormatting:cpmRequestFormatRequestMsg">
+            <wire targetNode="cpm_req_format"/>
+          </outputTerminal>
+          <failTerminal/>
+        </node>
+        <node name="cpm_res_format_map" type="XSLTransformation">
+          <property name="root" value="/"/>
+          <property name="XSLTransform" value="com/tagic/gc/cpm/xslt/cpm_res_format_map.xsl"/>
+          <property name="XMXMap" value="com/tagic/gc/cpm/xslt/cpm_res_format_map.map"/>
+          <property name="SMOVersion" value="SMO61"/>
+          <inputTerminal type="RequestFormatting:cpmRequestFormatResponseMsg"/>
+          <outputTerminal type="RequestFormatting:cpmRequestFormatResponseMsg">
+            <wire targetNode="cpm_request_trace"/>
+          </outputTerminal>
+          <failTerminal/>
+        </node>
+      </requestFlow>
+      <errorFlow>
+        <node displayName="paceCPMGCProposalSync : PaceGCCPMIntegration" name="PaceGCCPMIntegration_paceCPMGCProposalSync_ErrorInput" type="ErrorInput">
+          <outputTerminal name="catchAll" type="XMLSchema:anyType"/>
+        </node>
+        <node displayName="paceCPMGCProposalSync : PaceGCCPMIntegration" name="PaceGCCPMIntegration_paceCPMGCProposalSync_InputResponse" type="InputResponse">
+          <inputTerminal type="ns1:paceCPMGCProposalSyncResponseMsg"/>
+        </node>
+      </errorFlow>
+    </operation>
+  </interface>
+</mediationFlow>

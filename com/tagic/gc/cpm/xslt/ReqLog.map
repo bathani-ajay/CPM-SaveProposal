@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" targetNamespace="http://Impl-GcCpm/com/tagic/gc/cpm/xslt/ReqLog" version="8.0.5.0" xmlns:map="http://Impl-GcCpm/com/tagic/gc/cpm/xslt/ReqLog">
+    <input correlationContext="" message="{http://Impl-GcCpmLibrary/GCIntegrationCPM}cpmGCProposalSyncRequestMsg" sharedContext="{http://Impl-GcCpm}cpmSharedBO" smoName="wsdl-primary" transientContext="" type="smo" types="" xpath="/"/>
+    <output correlationContext="" message="{http://Impl-AuditLibrary/AuditLoggingServices}upsertServiceLogRequestMsg" sharedContext="{http://Impl-GcCpm}cpmSharedBO" smoName="wsdl-primary" transientContext="" type="smo" types="" xpath="/"/>
+    <imports>
+        <import kind="java" location="com.tagic.hnb.Transform" namespace="xalan://com.tagic.hnb.Transform"/>
+    </imports>
+    <namespaces>
+        <namespace kind="supplement" prefix="io7" uri="http://Impl-GcCpm"/>
+        <namespace kind="supplement" prefix="io6" uri="http://www.ibm.com/xmlns/prod/websphere/http/sca/6.1.0"/>
+        <namespace kind="supplement" prefix="in" uri="wsdl.http://Impl-GcCpmLibrary/GCIntegrationCPM"/>
+        <namespace kind="supplement" prefix="io" uri="http://www.w3.org/2005/08/addressing"/>
+        <namespace kind="supplement" prefix="io3" uri="http://schemas.xmlsoap.org/ws/2004/08/addressing"/>
+        <namespace kind="supplement" prefix="in2" uri="http://Impl-GcCpmLibrary/GCIntegrationCPM"/>
+        <namespace kind="supplement" prefix="io2" uri="http://www.w3.org/2003/05/soap-envelope"/>
+        <namespace kind="supplement" prefix="io5" uri="http://www.ibm.com/xmlns/prod/websphere/mq/sca/6.0.0"/>
+        <namespace kind="supplement" prefix="io4" uri="http://www.ibm.com/websphere/sibx/smo/v6.0.1"/>
+        <namespace kind="supplement" prefix="in3" uri="http://Impl-GcCpmLibrary"/>
+        <namespace kind="supplement" prefix="out2" uri="http://Impl-AuditLibrary/AuditLoggingServices"/>
+        <namespace kind="supplement" prefix="out3" uri="http://NBHD"/>
+        <namespace kind="supplement" prefix="out" uri="wsdl.http://Impl-AuditLibrary/AuditLoggingServices"/>
+        <namespace kind="extension" prefix="Transform" uri="xalan://com.tagic.hnb.Transform"/>
+    </namespaces>
+    <generation engine="xslt2"/>
+    <mappingDeclaration name="ReqLog">
+        <input namespace="http://www.ibm.com/websphere/sibx/smo/v6.0.1" path="smo"/>
+        <output namespace="http://www.ibm.com/websphere/sibx/smo/v6.0.1" path="smo"/>
+        <move>
+            <input path="body/cpmGCProposalSync/cpmGCRequest/inputXML/PropGeneralProposalInformation_RelationshipType"/>
+            <output path="body/upsertServiceLog/serviceLogRequest/caseNumber"/>
+        </move>
+        <assign value="/CPMInsurenceRestService/saveProposal">
+            <output path="body/upsertServiceLog/serviceLogRequest/serviceName"/>
+        </assign>
+        <assign value="PACE">
+            <output path="body/upsertServiceLog/serviceLogRequest/createdBy"/>
+        </assign>
+        <assign value="GC">
+            <output path="body/upsertServiceLog/serviceLogRequest/targetSystem"/>
+        </assign>
+        <assign value="OUT">
+            <output path="body/upsertServiceLog/serviceLogRequest/serviceType"/>
+        </assign>
+        <move>
+            <input path="context/shared/itTicketNumber" var="itTicketNumber"/>
+            <output path="body/upsertServiceLog/serviceLogRequest/ticketNumber"/>
+            <test lang="xpath">fn:boolean($itTicketNumber) and $itTicketNumber!=''</test>
+        </move>
+        <assign value="NB">
+            <output path="body/upsertServiceLog/serviceLogRequest/lob"/>
+        </assign>
+        <local>
+            <input path="context/shared" var="shared"/>
+            <input path="body/cpmGCProposalSync/cpmGCRequest" var="cpmGCRequest1"/>
+            <output path="context/shared"/>
+            <move>
+                <input path="$shared/auditPrimaryKey"/>
+                <output path="auditPrimaryKey"/>
+            </move>
+            <move>
+                <input path="$shared/itTicketNumber"/>
+                <output path="itTicketNumber"/>
+            </move>
+            <move>
+                <input path="$shared/loggingModule"/>
+                <output path="loggingModule"/>
+            </move>
+            <move>
+                <input path="$shared/traceLog"/>
+                <output path="traceLog"/>
+            </move>
+        </local>
+        <move>
+            <input path="context/shared/traceLog"/>
+            <output path="body/upsertServiceLog/serviceLogRequest/request"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

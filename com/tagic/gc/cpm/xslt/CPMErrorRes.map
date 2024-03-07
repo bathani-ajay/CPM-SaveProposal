@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" targetNamespace="http://Impl-GcCpm/com/tagic/gc/cpm/xslt/CPMErrorRes" version="8.0.5.0" xmlns:map="http://Impl-GcCpm/com/tagic/gc/cpm/xslt/CPMErrorRes">
+    <input correlationContext="" message="{http://Impl-GcCpmLibrary/GCIntegrationCPM}cpmGCProposalSyncRequestMsg" sharedContext="{http://Impl-GcCpm}cpmSharedBO" smoName="wsdl-primary" transientContext="" type="smo" types="" xpath="/"/>
+    <output correlationContext="" message="{http://Impl-GcCpmLibrary/PaceGCCPMIntegration}paceCPMGCProposalSyncResponseMsg" sharedContext="{http://Impl-GcCpm}cpmSharedBO" smoName="wsdl-primary" transientContext="" type="smo" types="" xpath="/"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="io7" uri="http://Impl-GcCpm"/>
+        <namespace kind="supplement" prefix="io6" uri="http://www.ibm.com/xmlns/prod/websphere/http/sca/6.1.0"/>
+        <namespace kind="supplement" prefix="in" uri="wsdl.http://Impl-GcCpmLibrary/GCIntegrationCPM"/>
+        <namespace kind="supplement" prefix="io" uri="http://www.w3.org/2005/08/addressing"/>
+        <namespace kind="supplement" prefix="io3" uri="http://schemas.xmlsoap.org/ws/2004/08/addressing"/>
+        <namespace kind="supplement" prefix="in2" uri="http://Impl-GcCpmLibrary/GCIntegrationCPM"/>
+        <namespace kind="supplement" prefix="io2" uri="http://www.w3.org/2003/05/soap-envelope"/>
+        <namespace kind="supplement" prefix="io5" uri="http://www.ibm.com/xmlns/prod/websphere/mq/sca/6.0.0"/>
+        <namespace kind="supplement" prefix="io4" uri="http://www.ibm.com/websphere/sibx/smo/v6.0.1"/>
+        <namespace kind="supplement" prefix="in3" uri="http://Impl-GcCpmLibrary"/>
+        <namespace kind="supplement" prefix="out2" uri="http://NBDATA"/>
+        <namespace kind="supplement" prefix="out3" uri="http://Impl-GcCpmLibrary/PaceGCCPMIntegration"/>
+        <namespace kind="supplement" prefix="out" uri="wsdl.http://Impl-GcCpmLibrary/PaceGCCPMIntegration"/>
+    </namespaces>
+    <generation engine="xslt2"/>
+    <mappingDeclaration name="CPMErrorRes">
+        <input namespace="http://www.ibm.com/websphere/sibx/smo/v6.0.1" path="smo"/>
+        <output namespace="http://www.ibm.com/websphere/sibx/smo/v6.0.1" path="smo"/>
+        <assign value="400">
+            <output path="body/paceCPMGCProposalSyncResponse/paceCPMResponse/status"/>
+        </assign>
+        <assign value="ESB / GC is not reachable. Please try after sometime.">
+            <output path="body/paceCPMGCProposalSyncResponse/paceCPMResponse/data"/>
+        </assign>
+    </mappingDeclaration>
+</mappingRoot>

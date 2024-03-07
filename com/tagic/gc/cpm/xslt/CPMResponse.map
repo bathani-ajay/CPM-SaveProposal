@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" targetNamespace="http://Impl-GcCpm/com/tagic/gc/cpm/xslt/CPMResponse" version="8.0.5.0" xmlns:map="http://Impl-GcCpm/com/tagic/gc/cpm/xslt/CPMResponse">
+    <input correlationContext="" message="{http://Impl-GcCpmLibrary/GCIntegrationCPM}cpmGCProposalSyncResponseMsg" sharedContext="{http://Impl-GcCpm}cpmSharedBO" smoName="wsdl-primary" transientContext="" type="smo" types="" xpath="/"/>
+    <output correlationContext="" message="{http://Impl-GcCpmLibrary/PaceGCCPMIntegration}paceCPMGCProposalSyncResponseMsg" sharedContext="{http://Impl-GcCpm}cpmSharedBO" smoName="wsdl-primary" transientContext="" type="smo" types="" xpath="/"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="io7" uri="http://Impl-GcCpm"/>
+        <namespace kind="supplement" prefix="io6" uri="http://www.ibm.com/xmlns/prod/websphere/http/sca/6.1.0"/>
+        <namespace kind="supplement" prefix="in" uri="wsdl.http://Impl-GcCpmLibrary/GCIntegrationCPM"/>
+        <namespace kind="supplement" prefix="io" uri="http://www.w3.org/2005/08/addressing"/>
+        <namespace kind="supplement" prefix="io3" uri="http://schemas.xmlsoap.org/ws/2004/08/addressing"/>
+        <namespace kind="supplement" prefix="in2" uri="http://Impl-GcCpmLibrary/GCIntegrationCPM"/>
+        <namespace kind="supplement" prefix="io2" uri="http://www.w3.org/2003/05/soap-envelope"/>
+        <namespace kind="supplement" prefix="io5" uri="http://www.ibm.com/xmlns/prod/websphere/mq/sca/6.0.0"/>
+        <namespace kind="supplement" prefix="io4" uri="http://www.ibm.com/websphere/sibx/smo/v6.0.1"/>
+        <namespace kind="supplement" prefix="in3" uri="http://Impl-GcCpmLibrary"/>
+        <namespace kind="supplement" prefix="out2" uri="http://NBDATA"/>
+        <namespace kind="supplement" prefix="out3" uri="http://Impl-GcCpmLibrary/PaceGCCPMIntegration"/>
+        <namespace kind="supplement" prefix="out" uri="wsdl.http://Impl-GcCpmLibrary/PaceGCCPMIntegration"/>
+        <namespace kind="supplement" prefix="out4" uri="http://GCD"/>
+    </namespaces>
+    <generation engine="xslt2"/>
+    <mappingDeclaration name="CPMResponse">
+        <input namespace="http://www.ibm.com/websphere/sibx/smo/v6.0.1" path="smo"/>
+        <output namespace="http://www.ibm.com/websphere/sibx/smo/v6.0.1" path="smo"/>
+        <condition>
+            <if>
+                <input path="body/cpmGCProposalSyncResponse/cpmGCResponse/responseXML/uwOperationResult/proposalNo" var="proposalNo"/>
+                <input path="body/cpmGCProposalSyncResponse/cpmGCResponse/responseXML/uwOperationResult/totalPremium" var="totalPremium"/>
+                <output path="body/paceCPMGCProposalSyncResponse/paceCPMResponse" var="paceCPMResponse"/>
+                <output path="body/paceCPMGCProposalSyncResponse/totalPremium" var="totalPremium1"/>
+                <test lang="xpath">fn:boolean($proposalNo) and $proposalNo!=''</test>
+                <assign value="200">
+                    <output path="$paceCPMResponse/status"/>
+                </assign>
+                <move>
+                    <input path="$proposalNo/." var="proposalNo1"/>
+                    <output path="$paceCPMResponse/data"/>
+                </move>
+                <move>
+                    <input path="$totalPremium/."/>
+                    <output path="$totalPremium1/."/>
+                </move>
+            </if>
+            <else>
+                <input path="body/cpmGCProposalSyncResponse/cpmGCResponse/errorText" var="errorText1"/>
+                <input path="body/cpmGCProposalSyncResponse/cpmGCResponse/error" var="error1"/>
+                <output path="body/paceCPMGCProposalSyncResponse/paceCPMResponse"/>
+                <assign value="400">
+                    <output path="status"/>
+                </assign>
+                <condition>
+                    <if>
+                        <input path="$errorText1/." var="errorText"/>
+                        <output path="data"/>
+                        <test lang="xpath">fn:boolean($errorText) and $errorText!=''</test>
+                        <move>
+                            <input path="$errorText/." var="errorText"/>
+                            <output path="."/>
+                        </move>
+                    </if>
+                    <else>
+                        <input path="$error1/."/>
+                        <output path="data"/>
+                        <move>
+                            <input path="." var="error"/>
+                            <output path="."/>
+                        </move>
+                    </else>
+                </condition>
+            </else>
+        </condition>
+    </mappingDeclaration>
+</mappingRoot>
