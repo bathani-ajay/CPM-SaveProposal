@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://Impl-GcCpmLibrary"
+	xmlns:bons0="http://Impl-GcCpmLibrary">
+	<xsd:include schemaLocation="otherDetailsParentBO.xsd"></xsd:include>
+	<xsd:include schemaLocation="InputXMLParentRiskBO.xsd"></xsd:include>
+	<xsd:complexType name="CPMParentBO">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="source"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="medium"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="campaign"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="productCode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="inputXML"
+				type="bons0:InputXMLParentRiskBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="otherDetailsGridXML"
+				type="bons0:otherDetailsParentBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="modeOfOperation"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="userId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="userRole"
+				type="xsd:string">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

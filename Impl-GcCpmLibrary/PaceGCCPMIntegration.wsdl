@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="PaceGCCPMIntegration" targetNamespace="http://Impl-GcCpmLibrary/PaceGCCPMIntegration" xmlns:bons1="http://NBDATA" xmlns:bons2="http://GCD" xmlns:tns="http://Impl-GcCpmLibrary/PaceGCCPMIntegration" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://Impl-GcCpmLibrary/PaceGCCPMIntegration">
+            <xsd:import namespace="http://GCD" schemaLocation="EsbDefaultParamsBO.xsd"/>
+            <xsd:import namespace="http://NBDATA" schemaLocation="ResponseBO.xsd"/>
+      <xsd:import namespace="http://NBDATA" schemaLocation="paceCPMProductDetailsBO.xsd"/>
+      <xsd:element name="paceCPMGCProposalSync">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="paceCPMRequest" nillable="true" type="bons1:paceCPMProductDetailsBO"/>
+                        <xsd:element name="EsbDefaultParams" nillable="true" type="bons2:EsbDefaultParamsBO"/>
+                        <xsd:element name="ticketNumber" nillable="true" type="xsd:string"/>
+                    </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="paceCPMGCProposalSyncResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="paceCPMResponse" nillable="true" type="bons1:ResponseBO"/>
+                        <xsd:element name="totalPremium" nillable="true" type="xsd:double"/>
+                    </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="paceCPMGCProposalSyncRequestMsg">
+    <wsdl:part element="tns:paceCPMGCProposalSync" name="paceCPMGCProposalSyncParameters"/>
+  </wsdl:message>
+    <wsdl:message name="paceCPMGCProposalSyncResponseMsg">
+    <wsdl:part element="tns:paceCPMGCProposalSyncResponse" name="paceCPMGCProposalSyncResult"/>
+  </wsdl:message>
+    <wsdl:portType name="PaceGCCPMIntegration">
+    <wsdl:operation name="paceCPMGCProposalSync">
+            <wsdl:input message="tns:paceCPMGCProposalSyncRequestMsg" name="paceCPMGCProposalSyncRequest"/>
+            <wsdl:output message="tns:paceCPMGCProposalSyncResponseMsg" name="paceCPMGCProposalSyncResponse"/>
+        </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

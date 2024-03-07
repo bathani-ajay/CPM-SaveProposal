@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://Impl-GcCpmLibrary"
+	xmlns:bons0="http://Impl-GcCpmLibrary">
+	<xsd:include schemaLocation="NameValueTypeBO.xsd"></xsd:include>
+	<xsd:complexType name="otherDetailsBO">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="Type" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="RiskLocation"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="RiskLocationAddress"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="City"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Pincode"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Typeofequipment"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="IdentificationSerialNo"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="SpecificationKVAHPKgcm2"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Make"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ModelNo"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="EngineNo"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ChasisNo"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="YearofManufacture"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Quantity"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="IsthereanyAMC"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="SumInsured"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="TotalofSI"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Remarks"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://Impl-GcCpmLibrary"
+	xmlns:bons0="http://Impl-GcCpmLibrary">
+	<xsd:include schemaLocation="GenericNameSpaceBO.xsd"></xsd:include>
+	<xsd:complexType name="RiskCoverDetailsBO">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="propCoverDetailsApplicable"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="propCoverDetailsCommision"
+				type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propCoverDetailsCoverGroups"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propCoverDetailsDifferentialSI" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propCoverDetailsEndorsementAmount" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propCoverDetailsIsDataDeleted" type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propCoverDetailsIsOldDataDeleted" type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="propCoverDetailsMMCPCode"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="propCoverDetailsPremium"
+				type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="propCoverDetailsRate"
+				type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="propCoverDetailsSumInsured"
+				type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propCoverDetailsCumulativeEndAmount" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propCoverDetailsCumulativeEndSerTax" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propCoverDetailsCumulativePremium" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propCoverDetailsCumulativeServuceTax" type="xsd:double">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

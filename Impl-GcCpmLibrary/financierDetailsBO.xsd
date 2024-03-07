@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://Impl-GcCpmLibrary"
+	xmlns:bons0="http://Impl-GcCpmLibrary">
+	<xsd:include schemaLocation="GenericNameSpaceBO.xsd"></xsd:include>
+	<xsd:complexType name="financierDetailsBO">
+		<xsd:sequence>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsAddressMandatary"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsAgreementType"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsBranchName"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsCityCode"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsCityMandatary"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsCountry"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsDistrictCode"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsDistrictMandatary"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsFinancierCodeMandatary"
+				type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsFinancierName"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsFinancierStatus"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsIsDataDeleted" type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsIsOldDataDeleted" type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsLoanAccountNo"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsPincodeMandatary" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsRemarks"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsSrNoMandatary" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsStateCode"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="propFinancierDetailsStateMandatary"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

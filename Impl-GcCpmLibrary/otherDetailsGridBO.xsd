@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://Impl-GcCpmLibrary"
+	xmlns:bons0="http://Impl-GcCpmLibrary">
+	<xsd:include schemaLocation="NetPremiumParentBO.xsd"></xsd:include>
+	<xsd:include schemaLocation="IPDSTotalPremiumParentBO.xsd"></xsd:include>
+	<xsd:include schemaLocation="floaterPolicyGridParentBO.xsd"></xsd:include>
+	<xsd:include schemaLocation="floaterAddOnParentBO.xsd"></xsd:include>
+	<xsd:include schemaLocation="otherDetailsGridParentBO.xsd"></xsd:include>
+	<xsd:include schemaLocation="cpmGridParentBO.xsd"></xsd:include>
+	<xsd:include schemaLocation="warrantyDetailsParentBO.xsd"></xsd:include>
+	<xsd:include schemaLocation="additionalInsuredParentBO.xsd"></xsd:include>
+	<xsd:include schemaLocation="clauseWordingsParentBO.xsd"></xsd:include>
+	<xsd:include schemaLocation="deductibleParentBO.xsd"></xsd:include>
+	<xsd:include schemaLocation="addOnCoverParentBO.xsd"></xsd:include>
+	<xsd:include
+		schemaLocation="RiskLocationOtherDetailsParentBO.xsd">
+	</xsd:include>
+	<xsd:include schemaLocation="SMENONSMEParentBO.xsd"></xsd:include>
+	<xsd:complexType name="otherDetailsGridBO">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="SMENONSME"
+				type="bons0:SMENONSMEParentBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="RiskLocationDetails"
+				type="bons0:RiskLocationOtherDetailsParentBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Deductibles"
+				type="bons0:deductibleParentBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ClauseWordings"
+				type="bons0:clauseWordingsParentBO">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0" name="AdditionalInsuredDetail"
+				type="bons0:additionalInsuredParentBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="WarrantyDetails"
+				type="bons0:warrantyDetailsParentBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="OtherDetails"
+				type="bons0:otherDetailsGridParentBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="AddonCoversClauses"
+				type="bons0:addOnCoverParentBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="CPMGrid"
+				type="bons0:cpmGridParentBO">
+			</xsd:element>
+
+
+
+			<xsd:element minOccurs="0"
+				name="CPMFloaterPolicyAddonCoversClausesGrid"
+				type="bons0:floaterAddOnParentBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="CPMFloaterPolicyGrid"
+				type="bons0:floaterPolicyGridParentBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="IPDSTotalPRemium"
+				type="bons0:IPDSTotalPremiumParentBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="NetPremium"
+				type="bons0:NetPremiumParentBO">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

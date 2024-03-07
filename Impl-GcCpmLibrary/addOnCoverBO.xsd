@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://Impl-GcCpmLibrary"
+	xmlns:bons0="http://Impl-GcCpmLibrary">
+	<xsd:include schemaLocation="NameValueTypeBO.xsd"></xsd:include>
+	<xsd:complexType name="addOnCoverBO">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="Type" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="RiskLocation"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="RiskLocationAddress"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="City"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Pincode"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="AddonCoverName"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="AddonTypeofCover"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="AddonSubLimitAmountorSumInsured"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="AddonRate"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="AddonPremium"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="EndtAddonSuminsured"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="EndtAddonRate"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="EndtAddonPremium"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Others"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="TotalPremium"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="DeletionofCoverwithRetainAmount"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="AnyOneAccidentLimit"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

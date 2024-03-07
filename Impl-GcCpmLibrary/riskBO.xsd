@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://Impl-GcCpmLibrary"
+	xmlns:bons0="http://Impl-GcCpmLibrary">
+	<xsd:include schemaLocation="GenericNameSpaceBO.xsd"></xsd:include>
+	<xsd:include schemaLocation="RiskCoverDetailsNameSpaceBO.xsd"></xsd:include>
+	<xsd:complexType name="riskBO">
+		<xsd:sequence>
+
+
+
+
+			<xsd:element minOccurs="0" name="propRisksCoverDetailsCol"
+				type="bons0:RiskCoverDetailsNameSpaceBO">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0" name="propRisksDifferentialSI"
+				type="xsd:double">
+			</xsd:element>
+
+			<xsd:element minOccurs="0" name="propRisksEndorsementAmount"
+				type="xsd:double">
+			</xsd:element>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<xsd:element minOccurs="0" name="propRisksPerson"
+				type="bons0:GenericNameSpaceBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="propRisksPremium"
+				type="xsd:double">
+			</xsd:element>
+
+			<xsd:element minOccurs="0" name="propRisksSumInsured"
+				type="xsd:double">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

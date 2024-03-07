@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://Impl-GcCpmLibrary"
+	xmlns:bons0="http://Impl-GcCpmLibrary">
+	<xsd:include schemaLocation="financierDetailsBO.xsd"></xsd:include>
+	<xsd:complexType name="financierDetailsParentBO">
+		<xsd:sequence>
+			<xsd:element minOccurs="0"
+				name="generalProposalFinancierDetails"
+				type="bons0:financierDetailsBO" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

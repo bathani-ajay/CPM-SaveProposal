@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="GCIntegrationCPM" targetNamespace="http://Impl-GcCpmLibrary/GCIntegrationCPM" xmlns:bons1="http://Impl-GcCpmLibrary" xmlns:tns="http://Impl-GcCpmLibrary/GCIntegrationCPM" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://Impl-GcCpmLibrary/GCIntegrationCPM">
+      <xsd:import namespace="http://Impl-GcCpmLibrary" schemaLocation="CPMResponseBO.xsd"/>
+      <xsd:import namespace="http://Impl-GcCpmLibrary" schemaLocation="CPMParentBO.xsd"/>
+      <xsd:element name="cpmGCProposalSync">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="cpmGCRequest" nillable="true" type="bons1:CPMParentBO"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="cpmGCProposalSyncResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="cpmGCResponse" nillable="true" type="bons1:CPMResponseBO"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="cpmGCProposalSyncRequestMsg">
+    <wsdl:part element="tns:cpmGCProposalSync" name="cpmGCProposalSyncParameters"/>
+  </wsdl:message>
+    <wsdl:message name="cpmGCProposalSyncResponseMsg">
+    <wsdl:part element="tns:cpmGCProposalSyncResponse" name="cpmGCProposalSyncResult"/>
+  </wsdl:message>
+    <wsdl:portType name="GCIntegrationCPM">
+    <wsdl:operation name="cpmGCProposalSync">
+      <wsdl:input message="tns:cpmGCProposalSyncRequestMsg" name="cpmGCProposalSyncRequest"/>
+      <wsdl:output message="tns:cpmGCProposalSyncResponseMsg" name="cpmGCProposalSyncResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

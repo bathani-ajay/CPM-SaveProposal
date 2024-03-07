@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+ServiceLibrary: true
+Class-Path: NBData_Library.jar 
+ GC_Unwinding_Data_Library.jar
+Created-By: 1.5.0 (IBM Corporation)
+

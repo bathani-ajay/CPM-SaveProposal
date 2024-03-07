@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://Impl-GcCpmLibrary"
+	xmlns:bons0="http://Impl-GcCpmLibrary">
+	<xsd:include schemaLocation="financierDetailsParentBO.xsd"></xsd:include>
+	<xsd:include schemaLocation="clauseDetailsParentBO.xsd"></xsd:include>
+	<xsd:include schemaLocation="PropRisksColBO.xsd"></xsd:include>
+	<xsd:complexType name="InputXMLParentRiskBO">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="PropRisksCol"
+				type="bons0:PropRisksColBO">
+			</xsd:element>
+
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposal_ClauseDetails_Col"
+				type="bons0:clauseDetailsParentBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposal_FinancierDetails_Col"
+				type="bons0:financierDetailsParentBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ProductType"
+				type="xsd:string">
+			</xsd:element>
+
+			<xsd:element minOccurs="0" name="PropRisks_RiderCoverage"
+				type="xsd:string">
+			</xsd:element>
+
+
+
+			<xsd:element minOccurs="0"
+				name="PropRisks_PaymentType_Mandatary" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PropRisks_CardExpiryMonth"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PropRisks_UWName"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PropRisks_ContactPerson"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PropRisks_ContactNumber"
+				type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PropRisks_EmailId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PropRisks_CustomerType"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PropRisks_AccountType"
+				type="xsd:string">
+			</xsd:element>
+
+			<xsd:element minOccurs="0"
+				name="PropRisks_IndustrySpecification" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PropRisks_ChannelType"
+				type="xsd:string">
+			</xsd:element>
+
+			<xsd:element minOccurs="0" name="PropRisks_PolicyWordings"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropRisks_TotalPremiumForMBD" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PropRisks_MBDVariant"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PropRisks_MBDSubVariant"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PropRisks_Text1"
+				type="xsd:string">
+			</xsd:element>
+
+
+
+
+
+
+
+
+			<xsd:element minOccurs="0" name="PropRisks_Product1224"
+				type="xsd:string">
+			</xsd:element>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<xsd:element minOccurs="0"
+				name="PropFinancierDetails_Validate" type="xsd:boolean">
+			</xsd:element>
+
+			<xsd:element minOccurs="0"
+				name="PropClauseDetails_ProductCode_Mandatary" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropClauseDetails_DepartmentCode_Mandatary"
+				type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_ProductCode"
+				type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_DisplayOfficeCode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_ServiceTaxExemptionCategory_Mandatary"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_BusinessType_Mandatary"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_Sector_Mandatary"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_ProposalDate_Mandatary"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_OfficeName"
+				type="xsd:string">
+			</xsd:element>
+
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_OfficeCode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_ReInsuranceInward"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_PolicySchedule_Mandatary"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_PolicyNumberChar"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_PolicyNo" type="xsd:double">
+			</xsd:element>
+
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_CovernoteGenType"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_TotalSi" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_EndorsementSi"
+				type="xsd:double">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_OptionForCalculation"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_BranchOfficeCode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_RelationshipType"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropPolicyEffectivedate_Fromdate_Mandatary"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropPolicyEffectivedate_Fromhour_Mandatary"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropPolicyEffectivedate_Todate_Mandatary" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropPolicyEffectivedate_Tohour_Mandatary" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_TypeOfPolicy"
+				type="xsd:string">
+			</xsd:element>
+
+			<xsd:element minOccurs="0"
+				name="PropReferenceNoDate_ReferenceDate_Mandatary"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_Remarks" type="xsd:string">
+			</xsd:element>
+
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_DepartmentCode"
+				type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropCustomerReferenceInfo_PolicyConversionDate"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropCustomerDtls_CustomerID_Mandatary" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropCustomerDtls_CustomerName" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropCustomerDtls_CustomerType" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_PolicyCurrency"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_ApplicationNumber"
+				type="xsd:string">
+			</xsd:element>
+
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_ProposalFormNumber"
+				type="xsd:string">
+			</xsd:element>
+
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_ActiveFlag"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_DepartmentName"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropDistributionChannel_SpecialDiscount" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropDistributionChannel_OperationMode" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropDistributionChannel_BusinessSource_Mandatary"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropDistributionChannel_BusineeChanneltype"
+				type="xsd:string">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0"
+				name="PropMODetails_TertiaryMOCode" type="xsd:string">
+			</xsd:element>
+
+			<xsd:element minOccurs="0"
+				name="PropVerticalDtls_TertiaryVerticalName" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropIntermediaryDetails_IntermediaryCode" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropIntermediaryDetails_IntermediaryName" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropIntermediaryDetails_IntermediaryType" type="xsd:string">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0"
+				name="PropCoverNoteDetails_Validate" type="xsd:boolean">
+			</xsd:element>
+
+
+
+
+
+
+
+
+			<xsd:element minOccurs="0"
+				name="PropPremiumCalculation_NetPremium" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropPremiumCalculation_ServiceTax" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropPremiumCalculation_StampDuty" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropPremiumCalculation_TotalPremium" type="xsd:double">
+			</xsd:element>
+
+
+
+
+			<xsd:element minOccurs="0"
+				name="PropPremiumCalculation_BasicPremium" type="xsd:double">
+			</xsd:element>
+
+
+
+			<xsd:element minOccurs="0"
+				name="PropPremiumCalculation_SP_PR_LTFactor" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropPremiumCalculation_EndorsementPremium"
+				type="xsd:double">
+			</xsd:element>
+
+
+
+
+
+			<xsd:element minOccurs="0"
+				name="PropPremiumCalculation_EndorsementServiceTax"
+				type="xsd:double">
+			</xsd:element>
+
+
+
+
+
+
+
+
+			<xsd:element minOccurs="0"
+				name="PropPremiumCalculation_NetPremiumCurrency"
+				type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropProductDetails_ProductCode" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropProductDetails_DepartmentCode" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropParameters_FinancierApplicability" type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropParameters_CoInsuranceApplicability" type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropParameters_ClauseApplicable" type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropParameters_ConditionApplicable" type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropParameters_ExclusionApplicable" type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropParameters_WarrentyApplicable" type="xsd:boolean">
+			</xsd:element>
+
+
+
+
+			<xsd:element minOccurs="0"
+				name="PropParameters_ShortPeriodLongPeriod" type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropParameters_CoverNoteApplicability" type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropParameters_ValidateExclusion" type="xsd:boolean">
+			</xsd:element>
+
+
+
+			<xsd:element minOccurs="0"
+				name="PropParameters_MinimumPremium" type="xsd:boolean">
+			</xsd:element>
+
+			<xsd:element minOccurs="0"
+				name="PropParameters_ValidateWarranty" type="xsd:boolean">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0"
+				name="PropParameters_ValidateEndorsementData" type="xsd:boolean">
+			</xsd:element>
+
+			<xsd:element minOccurs="0"
+				name="PropParameters_TariffProduct" type="xsd:boolean">
+			</xsd:element>
+
+			<xsd:element minOccurs="0"
+				name="PropParameters_PopulateTransactionBegin" type="xsd:boolean">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0"
+				name="PropParameters_CommissionApplicable" type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PropParameters_AfterFetch"
+				type="xsd:boolean">
+			</xsd:element>
+
+
+
+
+
+
+
+
+
+			<xsd:element minOccurs="0"
+				name="PropParameters_ValidateClause" type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropParameters_RenewalAllowed" type="xsd:boolean">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0"
+				name="PropParameters_ValidateCondition" type="xsd:boolean">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0"
+				name="PropCalculation_CalculateRate" type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropEndorsementDtls_CancellationForDoubleInsurance"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropEndorsementDtls_ISUWCompleted" type="xsd:boolean">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0"
+				name="PropEndorsementDtls_ValuationReport" type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropEndorsementDtls_CancellationDueToClaim"
+				type="xsd:boolean">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0"
+				name="PropEndorsementDtls_PartnerApplicationDate"
+				type="xsd:string">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0"
+				name="PropGeneralNodes_PolicyCoverVariant" type="xsd:string">
+			</xsd:element>
+
+			<xsd:element minOccurs="0"
+				name="PropGeneralNodes_ApplicationNo" type="xsd:string">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0"
+				name="PropGeneralNodes_ApplicationDate" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PropProductName"
+				type="xsd:string">
+			</xsd:element>
+
+			<xsd:element minOccurs="0"
+				name="PropGeneralProposalInformation_CertificateNumber"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropDistributionChannel_ServiceProvider" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropDistributionChannel_Commision" type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="PropDistributionChannel_TERRORISMCOMMISSION"
+				type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PropRisks_PaidupCapital"
+				type="xsd:double">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

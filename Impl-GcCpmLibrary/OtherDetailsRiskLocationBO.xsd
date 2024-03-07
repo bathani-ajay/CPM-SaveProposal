@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://Impl-GcCpmLibrary"
+	xmlns:bons0="http://Impl-GcCpmLibrary">
+	<xsd:include schemaLocation="NameValueTypeBO.xsd"></xsd:include>
+	<xsd:complexType name="OtherDetailsRiskLocationBO">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="Type" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="Location"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="Isthelocationaddresssameasthecustomeraddress"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="AddressLine1"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="AddressLine2"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="AddressLine3"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Village"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="City"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="District"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="State"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Country"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Pincode"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="TACEQZone"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="MREZone"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="CRESTAZone"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="AgeoftheRisk"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="TACOccupancy"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="OGISOccupancy"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="BusinessActivity"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ConstructionClass"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="SICCode"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="HazardGrade"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="SICDescription"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="SubSICCode"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="SubSICDescription"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="MinorLine"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="RiskEngineer"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PML"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="MFL"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="MAS"
+				type="bons0:NameValueTypeBO">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

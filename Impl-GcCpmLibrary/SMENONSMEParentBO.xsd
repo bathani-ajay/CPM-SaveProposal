@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://Impl-GcCpmLibrary"
+	xmlns:bons0="http://Impl-GcCpmLibrary">
+	<xsd:include schemaLocation="SMENONSMEBO.xsd"></xsd:include>
+	<xsd:complexType name="SMENONSMEParentBO">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="Name" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="Value" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="SMENONSME"
+				type="bons0:SMENONSMEBO">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

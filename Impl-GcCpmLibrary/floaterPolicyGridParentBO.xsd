@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://Impl-GcCpmLibrary"
+	xmlns:bons0="http://Impl-GcCpmLibrary">
+	<xsd:include schemaLocation="floaterPolicyGridBO.xsd"></xsd:include>
+	<xsd:complexType name="floaterPolicyGridParentBO">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="Name" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="Value" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="CPMFloaterPolicyGrid"
+				type="bons0:floaterPolicyGridBO" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
